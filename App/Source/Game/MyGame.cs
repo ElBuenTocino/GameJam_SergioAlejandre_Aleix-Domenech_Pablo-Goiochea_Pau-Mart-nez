@@ -2,6 +2,7 @@
 using SFML.System;
 using SFML.Window;
 using System;
+using System.Collections.Generic;
 
 namespace TcGame
 {
@@ -70,7 +71,14 @@ namespace TcGame
         }
         public void Update(float dt)
         {
-
+            if (Keyboard.IsKeyPressed(Keyboard.Key.R))
+            {
+                List<Actor> actores = Engine.Get.Scene.GetAll<Actor>();
+                foreach (Actor actor in actores) { 
+                    Engine.Get.Scene.Destroy(actor);
+                }
+                Init();
+            }
         }
         private void DestroyAll<T>() where T : Actor
         {
