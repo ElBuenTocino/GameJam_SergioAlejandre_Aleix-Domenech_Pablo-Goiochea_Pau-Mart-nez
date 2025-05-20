@@ -1,4 +1,5 @@
 ﻿using SFML.Graphics;
+using SFML.System;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,8 @@ namespace TcGame
         char[,] map;
 
         View view = Engine.Get.Window.GetView();
-        
+        float timeBetweenRefreshers;
+
 
         public Map()
         { 
@@ -62,15 +64,15 @@ namespace TcGame
             //Console.Clear();
             //Console.WriteLine(player.Position);
 
-            BoardChange(viewRect);
+            BoardChange(viewRect, dt);
         }
 
         void DrawBoard()
         {
-            for (int fil = 1; fil < map.GetLength(1); fil++)
+            for (int fil = 0; fil < map.GetLength(1); fil++)
             {
                 DrawRowSeparator();
-                for (int col = 1; col < map.GetLength(0); col++)
+                for (int col = 0; col < map.GetLength(0); col++)
                 {
                     Console.Write('|');
                     FillTile(col, fil); // Notice order: col is x, fil is y
@@ -83,7 +85,7 @@ namespace TcGame
         void DrawRowSeparator()
         {
             Console.Write("+");
-            for (int j = 1; j < map.GetLength(1); j++)
+            for (int j = 0; j < map.GetLength(1); j++)
                 Console.Write("---+");
             Console.WriteLine();
         }
@@ -102,9 +104,9 @@ namespace TcGame
         void UpdateMap(FloatRect viewRect)
         {
             // Clear the map
-            for (int i = 1; i < map.GetLength(0); i++)
+            for (int i = 0; i < map.GetLength(0); i++)
             {
-                for (int j = 1; j < map.GetLength(1); j++)
+                for (int j = 0; j < map.GetLength(1); j++)
                 {
                     map[i, j] = ' ';
                 }
@@ -122,13 +124,18 @@ namespace TcGame
             }
         }
 
-        void BoardChange(FloatRect viewRect)
+        void BoardChange(FloatRect viewRect, float dt)
         {
-            if (Keyboard.IsKeyPressed(Keyboard.Key.R))
+            Player player = Engine.Get.Scene.GetFirst<Player>();
+            timeBetweenRefreshers += dt;
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.R) && player.mapShowings > 0 && timeBetweenRefreshers >= 1f)
             {
                 Console.SetCursorPosition(0, 0);
                 UpdateMap(viewRect);
                 DrawBoard();
+                player.mapShowings--;
+                timeBetweenRefreshers = 0;
             }
         }
     }
