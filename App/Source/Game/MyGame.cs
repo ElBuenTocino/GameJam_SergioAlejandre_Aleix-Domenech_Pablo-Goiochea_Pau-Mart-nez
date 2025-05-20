@@ -31,6 +31,7 @@ namespace TcGame
             CreateOvniSpawner();
             CreateTankSpawner();
             hud = Engine.Get.Scene.Create<Hud>();
+            Engine.Get.Scene.Create<Map>();
         }
         private void CreatePersonSpawner()
         {

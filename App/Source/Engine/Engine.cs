@@ -49,7 +49,7 @@ namespace TcGame
 
     private void Init()
     {
-      videoMode = new VideoMode(1024, 768);
+      videoMode = new VideoMode(1000, 1000);
       Window = new RenderWindow(videoMode, "Arkanoid");
       Window.SetVerticalSyncEnabled(true);
 

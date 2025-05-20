@@ -21,7 +21,7 @@ namespace TcGame
 
         public override void Update(float dt)
         {
-            Console.WriteLine("Tank position" + Position);
+            //Console.WriteLine("Tank position" + Position);
 
             base.Update(dt);
 
