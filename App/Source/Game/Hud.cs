@@ -20,7 +20,6 @@ namespace TcGame
 
         public override void Update(float dt)
         {
-            Console.Clear();
             base.Update(dt);
             SetText();
         }
