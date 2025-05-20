@@ -4,42 +4,55 @@ using System;
 
 namespace TcGame
 {
-  public class Tank : Enemy
+  public class EnemyGhost : Enemy
   {
         public bool beingCaptured;
         public bool beingReached;
 
-        public Tank()
+        public EnemyGhost()
         {
             Layer = ELayer.Back;
             Random alea = new Random();
             Speed = 30;
-            Sprite = new Sprite (new Texture($"Data/Textures/Enemies/Tank0{alea.Next(1, 3)}.png"));
-            Position = new Vector2f(alea.Next(0, (int)Engine.Get.Window.Size.X), 0);
+            Position = new Vector2f(100,100);
             Center();
+            switch (alea.Next(1, 4))
+            {
+                case 1:
+                    Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost3.png"));
+                    break;
+                case 2:
+                    Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost2.png"));
+                    break;
+                case 3:
+                    Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost1.png"));
+                    break;
+            }
         }
 
         public override void Update(float dt)
         {
-
             base.Update(dt);
+            Forward = (Engine.Get.Scene.GetFirst<Player>().Position - Position).Normal();
+            Center();
 
-            if (!beingCaptured)
+            Speed = Math.Clamp(Speed, 30, 90);
+            CheckCollisions();
+        }
+
+        public void CheckCollisions()
+        {
+            Player player = Engine.Get.Scene.GetFirst<Player>();
+
+            if (GetGlobalBounds().Intersects(player.GetGlobalBounds()))
             {
-                Forward = new Vector2f(0, 1);
-
-                if (Position.Y >= Engine.Get.Window.Size.Y)
-                {
-                    Destroy();
-                }
+                //Player.Die();
             }
-            else
+
+            /*foreach(Bala in Engine.Get.Scene.GetAll<Bala>())
             {
-                Forward = new Vector2f(0, -1);
-                Speed = 10;
-            }
-            Position = Position + (Speed * Forward * dt);
-
+                //cosas
+            }*/
         }
   }
 }

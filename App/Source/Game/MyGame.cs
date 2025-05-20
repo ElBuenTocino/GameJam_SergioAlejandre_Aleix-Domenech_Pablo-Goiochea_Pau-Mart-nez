@@ -30,9 +30,10 @@ namespace TcGame
             background = Engine.Get.Scene.Create<Background>();
             Player player = Engine.Get.Scene.Create<Player>();
             CreatePersonSpawner();
-            CreateOvniSpawner();
+            /*CreateOvniSpawner();*/
             CreateTankSpawner();
             hud = Engine.Get.Scene.Create<Hud>();
+            Ghost ghost = new Ghost();
         }
         private void CreatePersonSpawner()
         {
@@ -44,7 +45,7 @@ namespace TcGame
             spawner.MinTime = 4.0f;
             spawner.Reset();
         }
-        private void CreateOvniSpawner()
+        /*private void CreateOvniSpawner()
         {
             ActorSpawner<Ghost> spawner;
             spawner = Engine.Get.Scene.Create<ActorSpawner<Ghost>>();
@@ -53,11 +54,11 @@ namespace TcGame
             spawner.MinTime = 8.0f;
             spawner.MinTime = 15.0f;
             spawner.Reset();
-        }
+        }*/
         private void CreateTankSpawner()
         {
-            ActorSpawner<Tank> spawner;
-            spawner = Engine.Get.Scene.Create<ActorSpawner<Tank>>();
+            ActorSpawner<EnemyGhost> spawner;
+            spawner = Engine.Get.Scene.Create<ActorSpawner<EnemyGhost>>();
             spawner.MinPosition = new Vector2f(0.0f, -200.0f);
             spawner.MaxPosition = new Vector2f(1000.0f, 0.0f);
             spawner.MinTime = 8.0f;

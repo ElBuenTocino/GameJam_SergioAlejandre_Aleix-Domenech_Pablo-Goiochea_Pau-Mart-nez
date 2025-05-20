@@ -12,10 +12,10 @@ namespace TcGame
         Random rnd = new Random();
         public Ghost()
         {
-            Layer = ELayer.Front;
+            Layer = ELayer.Back;
             Speed = 75;
             Center();
-            Forward = new Vector2f(1, 0);
+            Forward = new Vector2f(0, 0);
 
             switch (rnd.Next(1,4))
             {
@@ -29,6 +29,8 @@ namespace TcGame
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost1.png"));
                     break;
             }
+
+            Position = new Vector2f(100,100);
         }
 
         public override void Update(float dt)
