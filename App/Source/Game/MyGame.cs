@@ -1,6 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using System;
 
 namespace TcGame
 {
@@ -27,6 +28,7 @@ namespace TcGame
         public void Init()
         {
             background = Engine.Get.Scene.Create<Background>();
+            Player player = Engine.Get.Scene.Create<Player>();
             CreatePersonSpawner();
             CreateOvniSpawner();
             CreateTankSpawner();
@@ -68,7 +70,7 @@ namespace TcGame
         }
         public void Update(float dt)
         {
-            
+
         }
         private void DestroyAll<T>() where T : Actor
         {
