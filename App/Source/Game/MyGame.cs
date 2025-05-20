@@ -67,6 +67,7 @@ namespace TcGame
         }
         public void Update(float dt)
         {
+            
         }
         private void DestroyAll<T>() where T : Actor
         {

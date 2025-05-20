@@ -39,15 +39,17 @@ namespace TcGame
     public Scene Scene { private set; get; }
     public SoundManager SoundMgr { private set; get; }
     public Vector2f MousePos { get { return new Vector2f(Mouse.GetPosition(Window).X, Mouse.GetPosition(Window).Y); } }
-    public RenderWindow Window { private set; get; }
+    public RenderWindow Window { set; get; }
 
     public Random random = new Random(DateTime.Now.Millisecond);
 
     public float Time;
 
+        VideoMode videoMode;
+
     private void Init()
     {
-      VideoMode videoMode = new VideoMode(1024, 768);
+      videoMode = new VideoMode(1024, 768);
       Window = new RenderWindow(videoMode, "Arkanoid");
       Window.SetVerticalSyncEnabled(true);
 
@@ -68,6 +70,17 @@ namespace TcGame
       {
         Window.Close();
       }
+
+            //Window.Close();
+            //videoMode = new VideoMode(videoMode.Width - 1, videoMode.Height - 1);
+            //Window = new RenderWindow(videoMode, "get out");
+            if (Keyboard.IsKeyPressed(Keyboard.Key.K))
+            {
+                //Window.Close();
+                //videoMode = new VideoMode (videoMode.Width - 100, videoMode.Height - 100);
+                //Window = new RenderWindow(videoMode, "get out");
+
+            }
 
       Scene.Update(dt);
       SoundMgr.Update(dt);
