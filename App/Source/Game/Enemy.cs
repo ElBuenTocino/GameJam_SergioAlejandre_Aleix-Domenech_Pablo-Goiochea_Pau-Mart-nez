@@ -7,7 +7,7 @@ namespace TcGame
   {
     protected Enemy()
     {
-      OnDestroy += Explode;
+      //OnDestroy += Explode;
     }
 
     private void Explode(Actor actor)

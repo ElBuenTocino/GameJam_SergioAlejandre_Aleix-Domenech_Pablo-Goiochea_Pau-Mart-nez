@@ -44,8 +44,8 @@ namespace TcGame
         }
         private void CreateOvniSpawner()
         {
-            ActorSpawner<Ovni> spawner;
-            spawner = Engine.Get.Scene.Create<ActorSpawner<Ovni>>();
+            ActorSpawner<Ghost> spawner;
+            spawner = Engine.Get.Scene.Create<ActorSpawner<Ghost>>();
             spawner.MinPosition = new Vector2f(0.0f, +1000.0f);
             spawner.MaxPosition = new Vector2f(900.0f, 1000.0f);
             spawner.MinTime = 8.0f;
