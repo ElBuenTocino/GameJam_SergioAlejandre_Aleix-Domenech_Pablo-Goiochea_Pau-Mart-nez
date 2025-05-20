@@ -2,6 +2,7 @@
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using System.Collections.Generic;
 
 namespace TcGame
 {
@@ -28,6 +29,7 @@ namespace TcGame
         public void Init()
         {
             background = Engine.Get.Scene.Create<Background>();
+            Player player = Engine.Get.Scene.Create<Player>();
             CreatePersonSpawner();
             CreateOvniSpawner();
             CreateTankSpawner();
@@ -90,7 +92,15 @@ namespace TcGame
         }
         public void Update(float dt)
         {
-            
+            if (Keyboard.IsKeyPressed(Keyboard.Key.K))
+            {
+                List<Actor> actores = Engine.Get.Scene.GetAll<Actor>();
+                foreach (Actor actor in actores)
+                {
+                    Engine.Get.Scene.Destroy(actor);
+                }
+                Init();
+            }
         }
         private void DestroyAll<T>() where T : Actor
         {
