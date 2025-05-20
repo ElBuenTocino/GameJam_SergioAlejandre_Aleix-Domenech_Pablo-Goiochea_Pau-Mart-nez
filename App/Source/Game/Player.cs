@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace TcGame {
     public class Player : StaticActor {
+        private float coolDown = 0.3f, time = 0;
         public Player()
         {
             Layer = ELayer.Front;
@@ -16,7 +17,6 @@ namespace TcGame {
             Position = (Vector2f)Engine.Get.Window.Size / 2;
             Center();
             Speed = 500;
-            
         }
 
         public override void Draw(RenderTarget target, RenderStates states)
@@ -26,6 +26,8 @@ namespace TcGame {
 
         public override void Update(float dt)
         {
+            time += dt;
+
             Vector2f maousePos = Engine.Get.MousePos - Position;
             Rotation = (float)Math.Atan2(maousePos.Y, maousePos.X) * MathUtil.RAD2DEG + 90;
             if (Keyboard.IsKeyPressed(Keyboard.Key.A))
@@ -49,10 +51,21 @@ namespace TcGame {
             CheckCollision();
             CheckBorders();
 
+            if (Mouse.IsButtonPressed(Mouse.Button.Left) && time > coolDown)
+            {
+                Shoot();
+                time = 0;
+            }
+
             base.Update(dt);
             Forward *= 0;
         }
 
+        void Shoot()
+        {
+            Bala b = Engine.Get.Scene.Create<Bala>();
+            b.Position = new Vector2f(Position.X, Position.Y);
+        }
         private bool CheckCollision()
         {
             List<Person> personList = Engine.Get.Scene.GetAll<Person>();
