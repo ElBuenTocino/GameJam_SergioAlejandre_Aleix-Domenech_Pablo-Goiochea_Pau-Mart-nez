@@ -2,6 +2,7 @@
 using SFML.System;
 using SFML.Window;
 using System;
+using System.Collections.Generic;
 
 namespace TcGame
 {
@@ -30,10 +31,10 @@ namespace TcGame
             background = Engine.Get.Scene.Create<Background>();
             Player player = Engine.Get.Scene.Create<Player>();
             CreatePersonSpawner();
-            /*CreateOvniSpawner();*/
+            CreateOvniSpawner();
             CreateTankSpawner();
             hud = Engine.Get.Scene.Create<Hud>();
-            Ghost ghost = new Ghost();
+            Engine.Get.Scene.Create<Map>();
         }
         private void CreatePersonSpawner()
         {
@@ -45,20 +46,20 @@ namespace TcGame
             spawner.MinTime = 4.0f;
             spawner.Reset();
         }
-        /*private void CreateOvniSpawner()
+        private void CreateOvniSpawner()
         {
-            ActorSpawner<Ghost> spawner;
-            spawner = Engine.Get.Scene.Create<ActorSpawner<Ghost>>();
+            ActorSpawner<Ovni> spawner;
+            spawner = Engine.Get.Scene.Create<ActorSpawner<Ovni>>();
             spawner.MinPosition = new Vector2f(0.0f, +1000.0f);
             spawner.MaxPosition = new Vector2f(900.0f, 1000.0f);
             spawner.MinTime = 8.0f;
             spawner.MinTime = 15.0f;
             spawner.Reset();
-        }*/
+        }
         private void CreateTankSpawner()
         {
-            ActorSpawner<EnemyGhost> spawner;
-            spawner = Engine.Get.Scene.Create<ActorSpawner<EnemyGhost>>();
+            ActorSpawner<Tank> spawner;
+            spawner = Engine.Get.Scene.Create<ActorSpawner<Tank>>();
             spawner.MinPosition = new Vector2f(0.0f, -200.0f);
             spawner.MaxPosition = new Vector2f(1000.0f, 0.0f);
             spawner.MinTime = 8.0f;
@@ -70,7 +71,14 @@ namespace TcGame
         }
         public void Update(float dt)
         {
-
+            if (Keyboard.IsKeyPressed(Keyboard.Key.K))
+            {
+                List<Actor> actores = Engine.Get.Scene.GetAll<Actor>();
+                foreach (Actor actor in actores) { 
+                    Engine.Get.Scene.Destroy(actor);
+                }
+                Init();
+            }
         }
         private void DestroyAll<T>() where T : Actor
         {
