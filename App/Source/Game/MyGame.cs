@@ -71,7 +71,7 @@ namespace TcGame
         }
         public void Update(float dt)
         {
-            if (Keyboard.IsKeyPressed(Keyboard.Key.R))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.K))
             {
                 List<Actor> actores = Engine.Get.Scene.GetAll<Actor>();
                 foreach (Actor actor in actores) { 
