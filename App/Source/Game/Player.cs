@@ -14,9 +14,9 @@ namespace TcGame {
             Layer = ELayer.Front;
             Sprite = new Sprite(new Texture("Data/Textures/Player/Player.png"));
             Position = (Vector2f)Engine.Get.Window.Size / 2;
-            Sprite.Scale = new Vector2f(0.2f, 0.2f);
             Center();
             Speed = 500;
+            
         }
 
         public override void Draw(RenderTarget target, RenderStates states)
@@ -26,6 +26,8 @@ namespace TcGame {
 
         public override void Update(float dt)
         {
+            Vector2f maousePos = Engine.Get.MousePos - Position;
+            Rotation = (float)Math.Atan2(maousePos.Y, maousePos.X) * MathUtil.RAD2DEG + 90;
             if (Keyboard.IsKeyPressed(Keyboard.Key.A))
             {
                 Forward += new Vector2f(-1, 0);
