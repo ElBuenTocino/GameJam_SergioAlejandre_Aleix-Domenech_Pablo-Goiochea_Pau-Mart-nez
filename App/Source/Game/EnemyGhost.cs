@@ -1,6 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using System;
+using System.Threading.Tasks.Sources;
 
 namespace TcGame
 {
@@ -20,15 +21,12 @@ namespace TcGame
             {
                 case 1:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost3.png"));
-                    Speed = 30;
                     break;
                 case 2:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost2.png"));
-                    Speed = 50;
                     break;
                 case 3:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost1.png"));
-                    Speed = 20;
                     break;
             }
         }
@@ -50,14 +48,20 @@ namespace TcGame
 
             if (GetGlobalBounds().Intersects(player.GetGlobalBounds()))
             {
-                GameOver.dead = true;
+                //Player.Die();
             }
 
             foreach(Bala bala in Engine.Get.Scene.GetAll<Bala>())
             {
                 if (GetGlobalBounds().Intersects(bala.GetGlobalBounds()))
                 {
+                    Hud hud = Engine.Get.Scene.GetFirst<Hud>();
                     Engine.Get.Scene.Destroy(this);
+                    if (Speed = ))
+                    {
+
+                    }
+                    hud.score += 1;
                 }
             }
         }
