@@ -11,6 +11,8 @@ namespace TcGame
         public Hud hud { private set; get; }
         public Background background { get; private set; }
         private static MyGame instance;
+        public Bars rightBar, leftBar, downBar, upBar;
+        public float minDist = 1;
         public static MyGame Get
         {
             get
@@ -70,7 +72,7 @@ namespace TcGame
         private void CreateBars()
         {
             ActorSpawner<Bars> spawner;
-            Bars rightBar, leftBar, downBar, upBar;
+            
             rightBar =Engine.Get.Scene.Create<Bars>();
 
             leftBar = Engine.Get.Scene.Create<Bars>();

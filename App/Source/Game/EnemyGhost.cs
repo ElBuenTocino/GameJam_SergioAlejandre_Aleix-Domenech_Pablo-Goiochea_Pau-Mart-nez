@@ -44,6 +44,11 @@ namespace TcGame
             CheckCollisions();
         }
 
+        public override void Draw(RenderTarget target, RenderStates states)
+        {
+            base.Draw(target, states);
+        }
+
         public void CheckCollisions()
         {
             Player player = Engine.Get.Scene.GetFirst<Player>();
