@@ -21,6 +21,7 @@ namespace TcGame
                 case 1:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost3.png"));
                     Speed = 100;
+                    Sprite.Scale = new Vector2f(1.5f, 1.5f);
                     break;
                 case 2:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost2.png"));
@@ -29,6 +30,7 @@ namespace TcGame
                 case 3:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost1.png"));
                     Speed = 300;
+                    Sprite.Scale = new Vector2f(0.8f, 0.8f);
                     break;
             }
         }

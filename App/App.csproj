@@ -466,6 +466,9 @@
     <None Update="Data\Textures\Pixel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Data\Textures\Player\dead.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Data\Textures\Player\player.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
