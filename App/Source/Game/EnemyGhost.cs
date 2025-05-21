@@ -2,6 +2,7 @@
 using SFML.Graphics;
 using SFML.System;
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices.JavaScript;
 
 namespace TcGame
@@ -23,17 +24,17 @@ namespace TcGame
             {
                 case 1:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost3.png"));
-                    Speed = 100;
-                    //Sprite.Scale = new Vector2f(1.5f, 1.5f);
+                    Speed = 60;
+                    Sprite.Scale = new Vector2f(1.5f, 1.5f);
                     break;
                 case 2:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost2.png"));
-                    Speed = 200;
+                    Speed = 120;
                     break;
                 case 3:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost1.png"));
-                    Speed = 300;
-                    //Sprite.Scale = new Vector2f(0.8f, 0.8f);
+                    Speed = 180;
+                    Sprite.Scale = new Vector2f(0.8f, 0.8f);
                     break;
             }
 
@@ -66,9 +67,38 @@ namespace TcGame
             {
                 if (GetGlobalBounds().Intersects(bala.GetGlobalBounds()))
                 {
-                    Console.WriteLine(Speed);
                     Engine.Get.Scene.Destroy(this);
                     Engine.Get.Scene.Destroy(bala);
+                    if (Speed == 50)
+                    {
+                        Hud.Score += 10;
+                    }
+                    if (Speed == 100)
+                    {
+                        Hud.Score += 15;
+                    }
+                    else { Hud.Score += 20; }
+                    List<Bars> list = Engine.Get.Scene.GetAll<Bars>();
+                    foreach (Bars bar in list)
+                    {
+                        if (bar.Position.X < Engine.Get.Window.Size.X / 2)
+                        {
+                            bar.Position -= new Vector2f(10, 0);
+                        }
+                        else if (bar.Position.X > Engine.Get.Window.Size.X / 2)
+                        {
+                            bar.Position -= new Vector2f(-10, 0);
+                        }
+                        else if (bar.Position.Y < Engine.Get.Window.Size.Y / 2)
+                        {
+                            bar.Position -= new Vector2f(0, 10);
+                        }
+                        else if (bar.Position.Y > Engine.Get.Window.Size.Y / 2)
+                        {
+                            bar.Position -= new Vector2f(0, -10);
+                        }
+                    }
+
                 }
             }
         }

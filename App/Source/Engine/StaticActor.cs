@@ -7,7 +7,7 @@ namespace TcGame
     public class StaticActor : Actor
     {
         public Sprite Sprite { get; set; }
-        public bool isInBar;
+        
 
         public override void Draw(RenderTarget target, RenderStates states)
         {
