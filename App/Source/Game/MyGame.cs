@@ -1,5 +1,6 @@
 ﻿using App.Source.Game;
 using SFML.Graphics;
+using System;
 using SFML.System;
 using SFML.Window;
 using System.Collections.Generic;
@@ -73,10 +74,8 @@ namespace TcGame
         }
         private void CreateBars()
         {
-            ActorSpawner<Bars> spawner;
-            
             rightBar =Engine.Get.Scene.Create<Bars>();
-
+            
             leftBar = Engine.Get.Scene.Create<Bars>();
             leftBar.Position = new Vector2f(0 - leftBar.GetLocalBounds().Width / 2, Engine.Get.Window.Size.Y / 2);
             leftBar.Forward = new Vector2f(1, 0);
@@ -110,6 +109,12 @@ namespace TcGame
                 Init();
                 GameOver.dead = false;
             }
+            int minmax = 2000;
+            //Clamps for bars
+            rightBar.Position = new Vector2f(Math.Clamp(rightBar.Position.X, (Engine.Get.Window.Size.X / 2) + rightBar.GetLocalBounds().Width / 2, minmax), rightBar.Position.Y);
+            leftBar.Position = new Vector2f(Math.Clamp(leftBar.Position.X, -minmax , (Engine.Get.Window.Size.X / 2) - leftBar.GetLocalBounds().Width / 2), leftBar.Position.Y);
+            upBar.Position = new Vector2f(upBar.Position.X, Math.Clamp(upBar.Position.Y, -minmax, (Engine.Get.Window.Size.Y / 2) - upBar.GetLocalBounds().Width/2));
+            downBar.Position = new Vector2f(downBar.Position.X,  Math.Clamp(downBar.Position.Y, (Engine.Get.Window.Size.Y / 2) + downBar.GetLocalBounds().Width/2 , minmax));
         }
         private void DestroyAll<T>() where T : Actor
         {
