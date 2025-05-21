@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace TcGame {
     public class Player : StaticActor 
     {
-        private float coolDown = 0.06f, time = 0;
+        private float deathCooldown = 0.06f, time = 0, bulletCooldown = 0.3f;
         public int mapShowings;
         public Player()
         {
@@ -56,7 +56,7 @@ namespace TcGame {
                 CheckCollision();
                 CheckBars();
 
-                if (Mouse.IsButtonPressed(Mouse.Button.Left) && time > coolDown)
+                if (Mouse.IsButtonPressed(Mouse.Button.Left) && time > bulletCooldown)
                 {
                     Shoot();
                     time = 0;
@@ -69,7 +69,7 @@ namespace TcGame {
             {
                 CheckCollision();
                 time += dt;
-                if (time > coolDown)
+                if (time > deathCooldown)
                 {
                     Rotation = 0;
                     Sprite = new Sprite(new Texture("Data/Textures/Player/dead.png"));
