@@ -65,6 +65,16 @@ namespace TcGame
                     Console.WriteLine(Speed);
                     Engine.Get.Scene.Destroy(this);
                     Engine.Get.Scene.Destroy(bala);
+                    
+                    if (Speed == 50)
+                    {
+                        Hud.Score += 10;
+                    }
+                    if (Speed == 100)
+                    {
+                        Hud.Score += 15;
+                    }
+                    else { Hud.Score += 20; }
                     List<Bars> list = Engine.Get.Scene.GetAll<Bars>();
                     foreach (Bars bar in list) {
                         if (bar.Position.X < Engine.Get.Window.Size.X/2) {
@@ -72,7 +82,7 @@ namespace TcGame
                         }
                         else if(bar.Position.X > Engine.Get.Window.Size.X / 2)
                         {
-                            bar.Position += new Vector2f(10, 0);
+                            bar.Position -= new Vector2f(-10, 0);
                         }
                         else if (bar.Position.Y < Engine.Get.Window.Size.Y / 2)
                         {
@@ -80,7 +90,7 @@ namespace TcGame
                         }
                         else if (bar.Position.Y > Engine.Get.Window.Size.Y / 2)
                         {
-                            bar.Position += new Vector2f(0, 10);
+                            bar.Position -= new Vector2f(0, -10);
                         }
                     }
 
@@ -102,6 +112,7 @@ namespace TcGame
                     Sprite = defaultSprite;
                 }
             }
+
         }
     }
 }
