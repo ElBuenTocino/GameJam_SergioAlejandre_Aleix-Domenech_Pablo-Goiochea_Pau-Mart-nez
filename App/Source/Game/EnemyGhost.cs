@@ -37,6 +37,7 @@ namespace TcGame
             Center();
 
             Speed = Math.Clamp(Speed, 30, 90);
+            Speed += Speed * dt;
             CheckCollisions();
         }
 
@@ -49,10 +50,13 @@ namespace TcGame
                 //Player.Die();
             }
 
-            /*foreach(Bala in Engine.Get.Scene.GetAll<Bala>())
+            foreach(Bala bala in Engine.Get.Scene.GetAll<Bala>())
             {
-                //cosas
-            }*/
+                if (GetGlobalBounds().Intersects(bala.GetGlobalBounds()))
+                {
+                    Engine.Get.Scene.Destroy(this);
+                }
+            }
         }
   }
 }
