@@ -9,7 +9,7 @@ namespace TcGame
   {
         int persResc = 0, persCap = 0;
         private Text txt;
-        private SFML.Graphics.RectangleShape lightBattery;
+        public SFML.Graphics.RectangleShape lightBattery;
 
         public Hud() 
         {

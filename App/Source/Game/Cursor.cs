@@ -26,7 +26,7 @@ namespace TcGame
 
         public override void Draw(RenderTarget target, RenderStates states)
         {
-            if (Mouse.IsButtonPressed(Mouse.Button.Right))
+            if (Mouse.IsButtonPressed(Mouse.Button.Right) && Engine.Get.Scene.GetFirst<Hud>().lightBattery.Size.Y > 0)
             {
                 base.Draw(target, states);
                 target.Draw(rectangleShape, states);
