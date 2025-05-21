@@ -57,11 +57,6 @@ namespace TcGame
         {
             Player player = Engine.Get.Scene.GetFirst<Player>();
 
-            if (GetGlobalBounds().Intersects(player.GetGlobalBounds()))
-            {
-                GameOver.dead = true;
-            }
-
             foreach(Bala bala in Engine.Get.Scene.GetAll<Bala>())
             {
                 if (GetGlobalBounds().Intersects(bala.GetGlobalBounds()))

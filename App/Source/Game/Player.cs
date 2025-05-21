@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using App.Source.Game;
+using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 using System;
@@ -35,19 +36,19 @@ namespace TcGame {
 
                 Vector2f maousePos = Engine.Get.MousePos - Position;
                 Rotation = (float)Math.Atan2(maousePos.Y, maousePos.X) * MathUtil.RAD2DEG + 90;
-                if (Keyboard.IsKeyPressed(Keyboard.Key.A))
+                if (Keyboard.IsKeyPressed(Keyboard.Key.A) && (Position.X > 0))
                 {
                     Forward += new Vector2f(-1, 0);
                 }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.D))
+                if (Keyboard.IsKeyPressed(Keyboard.Key.D) && (Position.X < Engine.Get.Window.Size.X))
                 {
                     Forward += new Vector2f(1, 0);
                 }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.W))
+                if (Keyboard.IsKeyPressed(Keyboard.Key.W) && (Position.Y > 0))
                 {
                     Forward += new Vector2f(0, -1);
                 }
-                if (Keyboard.IsKeyPressed(Keyboard.Key.S))
+                if (Keyboard.IsKeyPressed(Keyboard.Key.S) && (Position.Y < Engine.Get.Window.Size.Y))
                 {
                     Forward += new Vector2f(0, 1);
                 }
@@ -85,7 +86,7 @@ namespace TcGame {
         {
             List<EnemyGhost> ghostList = Engine.Get.Scene.GetAll<EnemyGhost>();
             EnemyGhost nearestGhost = null;
-            float distMin = 50;
+            float distMin = 25;
 
             foreach (EnemyGhost ghost in ghostList)
             {
@@ -103,6 +104,37 @@ namespace TcGame {
                 time = 0;
             }
 
+            List<Battery> batteryList = Engine.Get.Scene.GetAll<Battery>();
+            Battery nearestBattery = null;
+            float distMinBattery = 40;
+
+            foreach (Battery battery in batteryList)
+            {
+                Vector2f distVector = (battery.Position - Position);
+                if (distVector.Size() <= distMinBattery)
+                {
+                    Engine.Get.Scene.Destroy(battery);
+                    Engine.Get.Scene.GetFirst<Hud>().lightBattery.Size = new Vector2f(Engine.Get.Scene.GetFirst<Hud>().lightBattery.Size.X, Engine.Get.Scene.GetFirst<Hud>().lightBattery.Size.Y + 10);
+                    if (Engine.Get.Scene.GetFirst<Hud>().lightBattery.Size.Y >= 150)
+                    {
+                        Engine.Get.Scene.GetFirst<Hud>().lightBattery.Size = new Vector2f(50, 150);
+                    }
+                }
+            }
+
+            List<Radar> radarList = Engine.Get.Scene.GetAll<Radar>();
+            Battery nearestRadar = null;
+            float distMinRadar = 40;
+
+            foreach (Radar radar in radarList)
+            {
+                Vector2f distVector = (radar.Position - Position);
+                if (distVector.Size() <= distMinBattery)
+                {
+                    Engine.Get.Scene.Destroy(radar);
+                    Engine.Get.Scene.GetFirst<Player>().mapShowings++;
+                }
+            }
         }
 
         void CheckBars()
