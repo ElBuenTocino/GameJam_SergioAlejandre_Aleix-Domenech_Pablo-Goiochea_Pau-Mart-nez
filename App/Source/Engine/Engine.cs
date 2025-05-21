@@ -54,6 +54,9 @@ namespace TcGame
             View fixedView = new View(new FloatRect(0, 0, 1000, 1000));
             Window.SetView(fixedView);
             Window.SetVerticalSyncEnabled(true);
+            Window.Position = new Vector2i(700, 10);
+            
+            
 
             Window.Resized += (sender, e) =>
             {

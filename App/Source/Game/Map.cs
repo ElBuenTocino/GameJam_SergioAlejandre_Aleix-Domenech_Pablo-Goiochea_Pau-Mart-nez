@@ -129,7 +129,7 @@ namespace TcGame
             Player player = Engine.Get.Scene.GetFirst<Player>();
             timeBetweenRefreshers += dt;
 
-            if (Keyboard.IsKeyPressed(Keyboard.Key.R) && player.mapShowings > 0 && timeBetweenRefreshers >= 1f)
+            if (Keyboard.IsKeyPressed(Keyboard.Key.R) && player.mapShowings > 0 && timeBetweenRefreshers >= 0.5f)
             {
                 Console.SetCursorPosition(0, 0);
                 UpdateMap(viewRect);
