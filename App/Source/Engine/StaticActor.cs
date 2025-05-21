@@ -11,14 +11,12 @@ namespace TcGame
 
         public override void Draw(RenderTarget target, RenderStates states)
         {
+            base.Draw(target, states);
+
             if (Sprite != null)
             {
-                if (!isInBar)
-                {
-                    base.Draw(target, states);
-                    states.Transform *= Transform;
-                    target.Draw(Sprite, states);
-                }
+                states.Transform *= Transform;
+                target.Draw(Sprite, states);
             }
         }
         public override FloatRect GetLocalBounds()

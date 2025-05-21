@@ -48,10 +48,10 @@ namespace TcGame
 
             //Speed = Math.Clamp(Speed, 30, 90);
             //Speed += Speed * dt;
+            isInBar = false;
             CheckCollisions();
+
         }
-
-
 
         public void CheckCollisions()
         {
@@ -69,25 +69,24 @@ namespace TcGame
                     Console.WriteLine(Speed);
                     Engine.Get.Scene.Destroy(this);
                     Engine.Get.Scene.Destroy(bala);
-
                 }
             }
         }
 
         public void CheckBarCollision()
         {
-            foreach (Bars bar in Engine.Get.Scene.GetAll<Bars>())
+            /*foreach (Bars bar in Engine.Get.Scene.GetAll<Bars>())
             {
                 if (GetGlobalBounds().Intersects(bar.GetGlobalBounds()))
                 {
-                    Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghostNull.png"));
-                    Sprite.Rotation += 30;
+                    //Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghostNull.png"));
+                    //Sprite.Rotation += 30;
                 }
                 else
                 {
                     Sprite = defaultSprite;
                 }
-            }
+            }*/
         }
     }
 }

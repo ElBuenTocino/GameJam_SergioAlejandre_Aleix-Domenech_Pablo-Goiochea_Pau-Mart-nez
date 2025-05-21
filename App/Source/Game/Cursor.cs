@@ -11,7 +11,7 @@ namespace TcGame
 {
     internal class Cursor : Actor
     {
-        private SFML.Graphics.RectangleShape rectangleShape;
+        public RectangleShape rectangleShape;
         public Cursor() 
         { 
             CreateLight();
@@ -51,6 +51,21 @@ namespace TcGame
         void MoveLight()
         {
             rectangleShape.Position = GetCursorPosition();
+        }
+
+        public void CheckEnemyCollision()
+        {
+            foreach (EnemyGhost ghost in Engine.Get.Scene.GetAll<EnemyGhost>())
+            {
+                //if (GetGlobalBounds().Intersects(ghost.GetGlobalBounds()))
+                if (ghost.GetGlobalBounds().Intersects(rectangleShape.GetGlobalBounds()))
+                {
+                    ghost.Sprite.Color = new Color(100, 100, 100, 100);
+                    ghost.Sprite = new Sprite(new Texture("Data\\Textures\\Player\\player.png"));
+                    //ghost.Sprite = ghost.defaultSprite;
+                }
+
+            }
         }
     }
 }

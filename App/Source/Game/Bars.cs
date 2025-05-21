@@ -7,14 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using TcGame;
 
-namespace App.Source.Game
+namespace TcGame
 {
     public class Bars : StaticActor
     {
         public Bars()
         {
             Layer = ELayer.Background;
-            Speed = 50f;
+            Speed = 20f;
             //Speed = 7.5f;
             Sprite = new Sprite(new Texture($"Data/Textures/Bars.jpg"));
             Position = new Vector2f(Engine.Get.Window.Size.X + Sprite.GetLocalBounds().Width/2, Engine.Get.Window.Size.Y/2);
@@ -42,14 +42,19 @@ namespace App.Source.Game
         {
             foreach(EnemyGhost ghost in Engine.Get.Scene.GetAll<EnemyGhost>())
             {
-                if (GetGlobalBounds().Intersects(ghost.GetGlobalBounds()))
+                //if (GetGlobalBounds().Intersects(ghost.GetGlobalBounds()))
+                if (ghost.GetGlobalBounds().Intersects(GetGlobalBounds()))
                 {
-                    ghost.Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghostNull.png"));
-
+                    //ghost.Sprite = new Sprite(new Texture("Data\\Textures\\Player\\player.png"));
+                    ghost.Sprite.Color = new Color(0, 0, 0, 0);
+                    ghost.Rotation += 5;
+                    ghost.isInBar = true;
                 }
-                else
+                else if (!ghost.isInBar)
                 {
-                    ghost.Sprite = ghost.defaultSprite;
+                    ghost.Sprite.Color = new Color(255, 255, 255, 100);
+                    ghost.Sprite = new Sprite(new Texture("Data\\Textures\\Player\\player.png"));
+                    //ghost.Sprite = ghost.defaultSprite;
                 }
             }
         }
