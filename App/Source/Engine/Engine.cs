@@ -49,16 +49,17 @@ namespace TcGame
 
         private void Init()
         {
-            videoMode = new VideoMode(1000, 1000);
+            uint resolution = 900;
+            videoMode = new VideoMode(resolution, resolution);
             Window = new RenderWindow(videoMode, "Arkanoid");
-            View fixedView = new View(new FloatRect(0, 0, 1000, 1000));
+            View fixedView = new View(new FloatRect(0, 0, resolution, resolution));
             Window.SetView(fixedView);
             Window.SetVerticalSyncEnabled(true);
 
             Window.Resized += (sender, e) =>
             {
                 // Maintain a fixed view regardless of window resizing
-                View view = new View(new FloatRect(0, 0, 1000, 1000));
+                View view = new View(new FloatRect(0, 0, resolution, resolution));
                 Window.SetView(view);
             };
 
@@ -78,17 +79,6 @@ namespace TcGame
             if (Keyboard.IsKeyPressed(Keyboard.Key.Escape))
             {
                 Window.Close();
-            }
-
-            //Window.Close();
-            //videoMode = new VideoMode(videoMode.Width - 1, videoMode.Height - 1);
-            //Window = new RenderWindow(videoMode, "get out");
-            if (Keyboard.IsKeyPressed(Keyboard.Key.K))
-            {
-                //Window.Close();
-                //videoMode = new VideoMode (videoMode.Width - 100, videoMode.Height - 100);
-                //Window = new RenderWindow(videoMode, "get out");
-
             }
 
             Scene.Update(dt);

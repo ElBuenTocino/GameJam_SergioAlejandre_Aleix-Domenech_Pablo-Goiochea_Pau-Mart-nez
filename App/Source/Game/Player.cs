@@ -8,8 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TcGame {
-    public class Player : StaticActor {
+    public class Player : StaticActor 
+    {
         private float coolDown = 0.3f, time = 0;
+        public int mapShowings;
         public Player()
         {
             Layer = ELayer.Front;
@@ -17,6 +19,7 @@ namespace TcGame {
             Position = (Vector2f)Engine.Get.Window.Size / 2;
             Center();
             Speed = 500;
+            mapShowings = 10;
         }
 
         public override void Draw(RenderTarget target, RenderStates states)
