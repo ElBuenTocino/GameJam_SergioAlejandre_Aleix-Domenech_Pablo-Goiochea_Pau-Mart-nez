@@ -1,7 +1,8 @@
-﻿using SFML.Graphics;
+﻿using App.Source.Game;
+using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
-using System;
+using System.Collections.Generic;
 
 namespace TcGame
 {
@@ -30,10 +31,10 @@ namespace TcGame
             background = Engine.Get.Scene.Create<Background>();
             Player player = Engine.Get.Scene.Create<Player>();
             CreatePersonSpawner();
-            CreateOvniSpawner();
+            //CreateOvniSpawner();
             CreateTankSpawner();
             hud = Engine.Get.Scene.Create<Hud>();
-            Engine.Get.Scene.Create<Map>();
+            CreateBars();
         }
         private void CreatePersonSpawner()
         {
@@ -45,7 +46,7 @@ namespace TcGame
             spawner.MinTime = 4.0f;
             spawner.Reset();
         }
-        private void CreateOvniSpawner()
+/*        private void CreateOvniSpawner()
         {
             ActorSpawner<Ovni> spawner;
             spawner = Engine.Get.Scene.Create<ActorSpawner<Ovni>>();
@@ -54,23 +55,52 @@ namespace TcGame
             spawner.MinTime = 8.0f;
             spawner.MinTime = 15.0f;
             spawner.Reset();
-        }
+        }*/
         private void CreateTankSpawner()
         {
-            ActorSpawner<Tank> spawner;
-            spawner = Engine.Get.Scene.Create<ActorSpawner<Tank>>();
+            ActorSpawner<EnemyGhost> spawner;
+            spawner = Engine.Get.Scene.Create<ActorSpawner<EnemyGhost>>();
             spawner.MinPosition = new Vector2f(0.0f, -200.0f);
             spawner.MaxPosition = new Vector2f(1000.0f, 0.0f);
             spawner.MinTime = 8.0f;
             spawner.MinTime = 10.0f;
             spawner.Reset();
         }
+        private void CreateBars()
+        {
+            ActorSpawner<Bars> spawner;
+            Bars rightBar, leftBar, downBar, upBar;
+            rightBar =Engine.Get.Scene.Create<Bars>();
+
+            leftBar = Engine.Get.Scene.Create<Bars>();
+            leftBar.Position = new Vector2f(0 - leftBar.GetLocalBounds().Width / 2, Engine.Get.Window.Size.Y / 2);
+            leftBar.Forward = new Vector2f(1, 0);
+
+            upBar = Engine.Get.Scene.Create<Bars>();
+            upBar.Rotation = 90;
+            upBar.Position = new Vector2f(Engine.Get.Window.Size.X / 2, 0-upBar.GetLocalBounds().Width/2);
+            upBar.Forward = new Vector2f(0, 1);
+            
+            downBar = Engine.Get.Scene.Create<Bars>();
+            downBar.Rotation = 90;
+            downBar.Position = new Vector2f(Engine.Get.Window.Size.X / 2, Engine.Get.Window.Size.Y + downBar.GetLocalBounds().Width / 2);
+            downBar.Forward = new Vector2f(0, -1);
+
+        }
         public void DeInit()
         {
         }
         public void Update(float dt)
         {
-
+            if (Keyboard.IsKeyPressed(Keyboard.Key.K))
+            {
+                List<Actor> actores = Engine.Get.Scene.GetAll<Actor>();
+                foreach (Actor actor in actores)
+                {
+                    Engine.Get.Scene.Destroy(actor);
+                }
+                Init();
+            }
         }
         private void DestroyAll<T>() where T : Actor
         {
