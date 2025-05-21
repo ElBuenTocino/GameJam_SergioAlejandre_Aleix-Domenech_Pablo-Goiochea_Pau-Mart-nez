@@ -29,38 +29,41 @@ namespace TcGame {
 
         public override void Update(float dt)
         {
-            time += dt;
+            if (!GameOver.dead)
+            {
+                time += dt;
 
-            Vector2f maousePos = Engine.Get.MousePos - Position;
-            Rotation = (float)Math.Atan2(maousePos.Y, maousePos.X) * MathUtil.RAD2DEG + 90;
-            if (Keyboard.IsKeyPressed(Keyboard.Key.A))
-            {
-                Forward += new Vector2f(-1, 0);
-            }
-            if (Keyboard.IsKeyPressed(Keyboard.Key.D))
-            {
-                Forward += new Vector2f(1, 0);
-            }
-            if (Keyboard.IsKeyPressed(Keyboard.Key.W))
-            {
-                Forward += new Vector2f(0, -1);
-            }
-            if (Keyboard.IsKeyPressed(Keyboard.Key.S))
-            {
-                Forward += new Vector2f(0, 1);
-            }
-            Forward = Forward.Normal();
-            CheckCollision();
-            CheckBars();
+                Vector2f maousePos = Engine.Get.MousePos - Position;
+                Rotation = (float)Math.Atan2(maousePos.Y, maousePos.X) * MathUtil.RAD2DEG + 90;
+                if (Keyboard.IsKeyPressed(Keyboard.Key.A))
+                {
+                    Forward += new Vector2f(-1, 0);
+                }
+                if (Keyboard.IsKeyPressed(Keyboard.Key.D))
+                {
+                    Forward += new Vector2f(1, 0);
+                }
+                if (Keyboard.IsKeyPressed(Keyboard.Key.W))
+                {
+                    Forward += new Vector2f(0, -1);
+                }
+                if (Keyboard.IsKeyPressed(Keyboard.Key.S))
+                {
+                    Forward += new Vector2f(0, 1);
+                }
+                Forward = Forward.Normal();
+                CheckCollision();
+                CheckBars();
 
-            if (Mouse.IsButtonPressed(Mouse.Button.Left) && time > coolDown)
-            {
-                Shoot();
-                time = 0;
-            }
+                if (Mouse.IsButtonPressed(Mouse.Button.Left) && time > coolDown)
+                {
+                    Shoot();
+                    time = 0;
+                }
 
-            base.Update(dt);
-            Forward *= 0;
+                base.Update(dt);
+                Forward *= 0;
+            }
         }
 
         void Shoot()
@@ -85,6 +88,7 @@ namespace TcGame {
 
             if (nearestGhost != null)
             {
+                Engine.Get.Scene.Destroy(nearestGhost);
                 GameOver.dead = true;  
             }
 

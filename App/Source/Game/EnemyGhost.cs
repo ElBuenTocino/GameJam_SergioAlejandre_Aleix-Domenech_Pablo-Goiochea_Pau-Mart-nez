@@ -1,7 +1,6 @@
 ﻿using SFML.Graphics;
 using SFML.System;
 using System;
-using System.Threading.Tasks.Sources;
 
 namespace TcGame
 {
@@ -21,12 +20,15 @@ namespace TcGame
             {
                 case 1:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost3.png"));
+                    Speed = 100;
                     break;
                 case 2:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost2.png"));
+                    Speed = 200;
                     break;
                 case 3:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost1.png"));
+                    Speed = 300;
                     break;
             }
         }
@@ -37,8 +39,8 @@ namespace TcGame
             Forward = (Engine.Get.Scene.GetFirst<Player>().Position - Position).Normal();
             Center();
 
-            Speed = Math.Clamp(Speed, 30, 90);
-            Speed += Speed * dt;
+            //Speed = Math.Clamp(Speed, 30, 90);
+            //Speed += Speed * dt;
             CheckCollisions();
         }
 
@@ -48,20 +50,17 @@ namespace TcGame
 
             if (GetGlobalBounds().Intersects(player.GetGlobalBounds()))
             {
-                //Player.Die();
+                GameOver.dead = true;
             }
 
             foreach(Bala bala in Engine.Get.Scene.GetAll<Bala>())
             {
                 if (GetGlobalBounds().Intersects(bala.GetGlobalBounds()))
                 {
-                    Hud hud = Engine.Get.Scene.GetFirst<Hud>();
+                    Console.WriteLine(Speed);
                     Engine.Get.Scene.Destroy(this);
-                    if (Speed = ))
-                    {
+                    Engine.Get.Scene.Destroy(bala);
 
-                    }
-                    hud.score += 1;
                 }
             }
         }
