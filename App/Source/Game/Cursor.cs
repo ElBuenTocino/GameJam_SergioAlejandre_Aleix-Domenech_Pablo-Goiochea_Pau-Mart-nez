@@ -21,7 +21,7 @@ namespace TcGame
         public override void Update(float dt)
         {
             base.Update(dt);
-            if (Mouse.IsButtonPressed(Mouse.Button.Right))
+            if (Mouse.IsButtonPressed(Mouse.Button.Right) && Engine.Get.Scene.GetFirst<Hud>().lightBattery.Size.Y > 0)
             {
                 MoveLight();
                 CheckEnemyCollision();
