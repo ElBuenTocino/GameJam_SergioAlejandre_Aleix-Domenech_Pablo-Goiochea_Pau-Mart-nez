@@ -101,6 +101,7 @@ namespace TcGame
                     Engine.Get.Scene.Destroy(actor);
                 }
                 Init();
+                GameOver.dead = false;
             }
         }
         private void DestroyAll<T>() where T : Actor

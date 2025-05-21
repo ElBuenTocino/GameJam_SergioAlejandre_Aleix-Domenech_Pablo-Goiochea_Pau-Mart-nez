@@ -20,15 +20,15 @@ namespace TcGame
             {
                 case 1:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost3.png"));
-                    Speed = 30;
+                    Speed = 100;
                     break;
                 case 2:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost2.png"));
-                    Speed = 50;
+                    Speed = 200;
                     break;
                 case 3:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost1.png"));
-                    Speed = 20;
+                    Speed = 300;
                     break;
             }
         }
@@ -39,8 +39,8 @@ namespace TcGame
             Forward = (Engine.Get.Scene.GetFirst<Player>().Position - Position).Normal();
             Center();
 
-            Speed = Math.Clamp(Speed, 30, 90);
-            Speed += Speed * dt;
+            //Speed = Math.Clamp(Speed, 30, 90);
+            //Speed += Speed * dt;
             CheckCollisions();
         }
 
@@ -57,7 +57,10 @@ namespace TcGame
             {
                 if (GetGlobalBounds().Intersects(bala.GetGlobalBounds()))
                 {
+                    Console.WriteLine(Speed);
                     Engine.Get.Scene.Destroy(this);
+                    Engine.Get.Scene.Destroy(bala);
+
                 }
             }
         }

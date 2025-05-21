@@ -24,6 +24,16 @@ namespace App.Source.Game
         public override void Update(float dt)
         {
             base.Update(dt);
+            CheckPlayerColision();
+        }
+
+        public void CheckPlayerColision()
+        {
+            Player player = Engine.Get.Scene.GetFirst<Player>();
+            if (GetGlobalBounds().Intersects(player.GetGlobalBounds()))
+            {
+                GameOver.dead = true;
+            }
         }
 
     }
