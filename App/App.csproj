@@ -427,6 +427,9 @@
     <None Update="Data\Textures\Enemies\ghost3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Data\Textures\Enemies\ghostNull.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Data\Textures\Enemies\Ovni01.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
