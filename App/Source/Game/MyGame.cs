@@ -30,24 +30,25 @@ namespace TcGame
         {
             background = Engine.Get.Scene.Create<Background>();
             Player player = Engine.Get.Scene.Create<Player>();
-            CreatePersonSpawner();
+            //CreatePersonSpawner();
             //CreateOvniSpawner();
             CreateGhostSpawner();
+            CreateBatterySpawner();
             hud = Engine.Get.Scene.Create<Hud>();
             CreateBars();
             Engine.Get.Scene.Create<Map>();
             Engine.Get.Scene.Create<Cursor>();
         }
-        private void CreatePersonSpawner()
-        {
-            ActorSpawner<Person> spawner;
-            spawner = Engine.Get.Scene.Create<ActorSpawner<Person>>();
-            spawner.MinPosition = new Vector2f(0.0f, -60.0f);
-            spawner.MaxPosition = new Vector2f(1000.0f, -60.0f);
-            spawner.MinTime = 2.0f;
-            spawner.MinTime = 4.0f;
-            spawner.Reset();
-        }
+        //private void CreatePersonSpawner()
+        //{
+        //    ActorSpawner<Person> spawner;
+        //    spawner = Engine.Get.Scene.Create<ActorSpawner<Person>>();
+        //    spawner.MinPosition = new Vector2f(0.0f, -60.0f);
+        //    spawner.MaxPosition = new Vector2f(1000.0f, -60.0f);
+        //    spawner.MinTime = 2.0f;
+        //    spawner.MinTime = 4.0f;
+        //    spawner.Reset();
+        //}
 /*        private void CreateOvniSpawner()
         {
             ActorSpawner<Ovni> spawner;
@@ -68,6 +69,18 @@ namespace TcGame
             spawner.MaxTime = 3.0f;
             spawner.Reset();
         }
+
+        private void CreateBatterySpawner()
+        {
+            ActorSpawner<Battery> spawner;
+            spawner = Engine.Get.Scene.Create<ActorSpawner<Battery>>();
+            spawner.MinPosition = new Vector2f(0.0f, -200.0f);
+            spawner.MaxPosition = new Vector2f(1000.0f, 0.0f);
+            spawner.MinTime = 3.0f;
+            spawner.MaxTime = 5.0f;
+            spawner.Reset();
+        }
+
         private void CreateBars()
         {
             ActorSpawner<Bars> spawner;

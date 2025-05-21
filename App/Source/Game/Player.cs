@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using App.Source.Game;
+using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 using System;
@@ -85,7 +86,7 @@ namespace TcGame {
         {
             List<EnemyGhost> ghostList = Engine.Get.Scene.GetAll<EnemyGhost>();
             EnemyGhost nearestGhost = null;
-            float distMin = 50;
+            float distMin = 20;
 
             foreach (EnemyGhost ghost in ghostList)
             {
@@ -103,6 +104,23 @@ namespace TcGame {
                 time = 0;
             }
 
+            List<Battery> batteryList = Engine.Get.Scene.GetAll<Battery>();
+            Battery nearestBattery = null;
+            float distMinBattery = 20;
+
+            foreach (Battery battery in batteryList)
+            {
+                Vector2f distVector = (battery.Position - Position);
+                if (distVector.Size() <= distMinBattery)
+                {
+                    Engine.Get.Scene.Destroy(battery);
+                    Engine.Get.Scene.GetFirst<Hud>().lightBattery.Size = new Vector2f(Engine.Get.Scene.GetFirst<Hud>().lightBattery.Size.X, Engine.Get.Scene.GetFirst<Hud>().lightBattery.Size.Y + 10);
+                    if (Engine.Get.Scene.GetFirst<Hud>().lightBattery.Size.Y >= 150)
+                    {
+                        Engine.Get.Scene.GetFirst<Hud>().lightBattery.Size = new Vector2f(50, 150);
+                    }
+                }
+            }
         }
 
         void CheckBars()

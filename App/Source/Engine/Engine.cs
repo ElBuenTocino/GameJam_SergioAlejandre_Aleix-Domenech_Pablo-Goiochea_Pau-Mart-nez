@@ -56,7 +56,6 @@ namespace TcGame
             Window.SetView(fixedView);
             Window.SetVerticalSyncEnabled(true);
             Window.Position = new Vector2i(700, 10);
-            Console.SetWindowPosition(300, 10);
             
             
 

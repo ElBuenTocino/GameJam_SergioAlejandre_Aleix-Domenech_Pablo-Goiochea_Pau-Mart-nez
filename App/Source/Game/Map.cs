@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using App.Source.Game;
+using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 using System;
@@ -93,12 +94,26 @@ namespace TcGame
         {
             if (map[x, y] == 'P')
             {
-                Console.Write(" P ");
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.Write("   ");
+            }
+            else if (map[x,y] == 'G')
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+
+                Console.Write("   ");
+            }
+            else if (map[x, y] == 'B')
+            {
+                Console.BackgroundColor = ConsoleColor.Yellow;
+
+                Console.Write("   ");
             }
             else
             {
                 Console.Write(" · ");
             }
+            Console.ResetColor();
         }
 
         void UpdateMap(FloatRect viewRect)
@@ -121,6 +136,46 @@ namespace TcGame
             if (px >= 0 && px < tilesWidth && py >= 0 && py < tilesHeight)
             {
                 map[px, py] = 'P';
+            }
+
+            List<EnemyGhost> enemyGhosts = Engine.Get.Scene.GetAll<EnemyGhost>();
+
+            if (enemyGhosts != null && enemyGhosts.Count > 0)
+            {
+                for (int i = 0; i <= enemyGhosts.Count - 1; i++)
+                {
+                    if (enemyGhosts[i] != null)
+                    {
+                        int gx = (int)((enemyGhosts[i].Position.X - viewRect.Left) / 100);
+                        int gy = (int)((enemyGhosts[i].Position.Y - viewRect.Top) / 100);
+
+
+                        if (gx >= 0 && gx < tilesWidth && gy >= 0 && gy < tilesHeight)
+                        {
+                            map[gx, gy] = 'G';
+                        }
+                    }
+                }
+            }
+
+            List<Battery> batteries = Engine.Get.Scene.GetAll<Battery>();
+
+            if (batteries != null && batteries.Count > 0)
+            {
+                for (int i = 0; i <= batteries.Count - 1; i++)
+                {
+                    if (batteries[i] != null)
+                    {
+                        int bx = (int)((batteries[i].Position.X - viewRect.Left) / 100);
+                        int by = (int)((batteries[i].Position.Y - viewRect.Top) / 100);
+
+
+                        if (bx >= 0 && bx < tilesWidth && by >= 0 && by < tilesHeight)
+                        {
+                            map[bx, by] = 'B';
+                        }
+                    }
+                }
             }
         }
 

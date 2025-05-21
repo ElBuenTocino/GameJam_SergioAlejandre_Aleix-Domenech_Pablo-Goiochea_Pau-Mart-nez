@@ -61,7 +61,7 @@ namespace TcGame
         {
             if (Mouse.IsButtonPressed(Mouse.Button.Right) && lightBattery.Size.Y > 0)
             {
-                lightBattery.Size = new Vector2f(lightBattery.Size.X, lightBattery.Size.Y - 1);
+                lightBattery.Size = new Vector2f(lightBattery.Size.X, lightBattery.Size.Y - 0.5f);
             }
         }
     }
