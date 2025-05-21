@@ -34,7 +34,7 @@ namespace TcGame
             Player player = Engine.Get.Scene.GetFirst<Player>();
             if (GetGlobalBounds().Intersects(player.GetGlobalBounds()))
             {
-                GameOver.dead = true;
+                GameOver.dead = false;
             }
         }
 
