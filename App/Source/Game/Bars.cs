@@ -51,9 +51,14 @@ namespace TcGame
                 }
                 else if (!ghost.isInBar)
                 {
+
+                    ghost.Sprite.Color = new Color(255, 255, 255, 255);
+                    ghost.Sprite = ghost.defaultSprite;
+
                     ghost.Sprite.Color = new Color(255, 255, 255, 200);
                     ghost.Sprite = ghost.defaultSprite;
                     //ghost.Sprite = ghost.defaultSprite;
+
                 }
             }
         }
