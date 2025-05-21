@@ -36,6 +36,7 @@ namespace TcGame
             hud = Engine.Get.Scene.Create<Hud>();
             CreateBars();
             Engine.Get.Scene.Create<Map>();
+            Engine.Get.Scene.Create<Cursor>();
         }
         private void CreatePersonSpawner()
         {
