@@ -51,14 +51,14 @@ namespace TcGame
         {
             videoMode = new VideoMode(1000, 1000);
             Window = new RenderWindow(videoMode, "Arkanoid");
-            View fixedView = new View(new FloatRect(0, 0, 1200, 1200));
+            View fixedView = new View(new FloatRect(0, 0, 1000, 1000));
             Window.SetView(fixedView);
             Window.SetVerticalSyncEnabled(true);
 
             Window.Resized += (sender, e) =>
             {
                 // Maintain a fixed view regardless of window resizing
-                View view = new View(new FloatRect(0, 0, 1200, 1200));
+                View view = new View(new FloatRect(0, 0, 1000, 1000));
                 Window.SetView(view);
             };
 

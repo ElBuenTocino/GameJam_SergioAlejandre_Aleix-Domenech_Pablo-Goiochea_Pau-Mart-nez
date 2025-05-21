@@ -56,8 +56,8 @@ namespace TcGame
             //tilesWidth = (int)(viewRect.Width / 100);
             //tilesHeight = (int)(viewRect.Height / 100);
 
-            tilesHeight = 12;
-            tilesWidth = 12;
+            tilesHeight = 10;
+            tilesWidth = 10;
 
             map = new char[tilesWidth, tilesHeight];
 
