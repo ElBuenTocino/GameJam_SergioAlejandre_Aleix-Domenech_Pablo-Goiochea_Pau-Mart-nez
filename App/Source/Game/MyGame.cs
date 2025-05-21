@@ -11,6 +11,8 @@ namespace TcGame
         public Hud hud { private set; get; }
         public Background background { get; private set; }
         private static MyGame instance;
+        public Bars rightBar, leftBar, downBar, upBar;
+        public float minDist = 1;
         public static MyGame Get
         {
             get
@@ -32,10 +34,12 @@ namespace TcGame
             Player player = Engine.Get.Scene.Create<Player>();
             CreatePersonSpawner();
             //CreateOvniSpawner();
-            CreateTankSpawner();
+            CreateGhostSpawner(new Vector2f(1000.0f, 0.0f), new Vector2f(0.0f, -200.0f));
+            CreateGhostSpawner(new Vector2f(1000, Engine.Get.Window.Size.Y+100), new Vector2f(0, Engine.Get.Window.Size.Y));
             hud = Engine.Get.Scene.Create<Hud>();
             CreateBars();
             Engine.Get.Scene.Create<Map>();
+            Engine.Get.Scene.Create<Cursor>();
         }
         private void CreatePersonSpawner()
         {
@@ -57,20 +61,20 @@ namespace TcGame
             spawner.MinTime = 15.0f;
             spawner.Reset();
         }*/
-        private void CreateTankSpawner()
+        private void CreateGhostSpawner(Vector2f MaxPosition, Vector2f MinPosition)
         {
             ActorSpawner<EnemyGhost> spawner;
             spawner = Engine.Get.Scene.Create<ActorSpawner<EnemyGhost>>();
-            spawner.MinPosition = new Vector2f(0.0f, -200.0f);
-            spawner.MaxPosition = new Vector2f(1000.0f, 0.0f);
-            spawner.MinTime = 8.0f;
-            spawner.MinTime = 10.0f;
+            spawner.MinPosition = MinPosition;
+            spawner.MaxPosition = MaxPosition;
+            spawner.MinTime = 1.0f;
+            spawner.MaxTime = 3.0f;
             spawner.Reset();
         }
         private void CreateBars()
         {
             ActorSpawner<Bars> spawner;
-            Bars rightBar, leftBar, downBar, upBar;
+            
             rightBar =Engine.Get.Scene.Create<Bars>();
 
             leftBar = Engine.Get.Scene.Create<Bars>();

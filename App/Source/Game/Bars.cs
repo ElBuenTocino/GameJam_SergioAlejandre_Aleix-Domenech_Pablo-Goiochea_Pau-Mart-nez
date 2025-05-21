@@ -7,14 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using TcGame;
 
-namespace App.Source.Game
+namespace TcGame
 {
     public class Bars : StaticActor
     {
         public Bars()
         {
             Layer = ELayer.Background;
-            Speed = 7.5f;
+            Speed = 15f;
             Sprite = new Sprite(new Texture($"Data/Textures/Bars.jpg"));
             Position = new Vector2f(Engine.Get.Window.Size.X + Sprite.GetLocalBounds().Width/2, Engine.Get.Window.Size.Y/2);
             Center();
@@ -25,6 +25,7 @@ namespace App.Source.Game
         {
             base.Update(dt);
             CheckPlayerColision();
+            CheckEnemyCollision();
         }
 
         public void CheckPlayerColision()
@@ -32,9 +33,24 @@ namespace App.Source.Game
             Player player = Engine.Get.Scene.GetFirst<Player>();
             if (GetGlobalBounds().Intersects(player.GetGlobalBounds()))
             {
-                GameOver.dead = true;
+                GameOver.dead = false;
             }
         }
 
+        public void CheckEnemyCollision()
+        {
+            foreach(EnemyGhost ghost in Engine.Get.Scene.GetAll<EnemyGhost>())
+            {
+                if (GetGlobalBounds().Intersects(ghost.GetGlobalBounds()))
+                {
+                    ghost.Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghostNull.png"));
+
+                }
+                else
+                {
+                    ghost.Sprite = ghost.defaultSprite;
+                }
+            }
+        }
     }
 }

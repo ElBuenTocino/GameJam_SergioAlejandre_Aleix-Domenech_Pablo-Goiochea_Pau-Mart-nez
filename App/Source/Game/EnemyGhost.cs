@@ -1,6 +1,9 @@
-﻿using SFML.Graphics;
+﻿using App.Source.Game;
+using SFML.Graphics;
 using SFML.System;
 using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.JavaScript;
 
 namespace TcGame
 {
@@ -8,6 +11,7 @@ namespace TcGame
   {
         public bool beingCaptured;
         public bool beingReached;
+        public Sprite defaultSprite;
 
         public EnemyGhost()
         {
@@ -20,17 +24,21 @@ namespace TcGame
             {
                 case 1:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost3.png"));
-                    Speed = 100;
+                    Speed = 50;
+                    Sprite.Scale = new Vector2f(1.5f, 1.5f);
                     break;
                 case 2:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost2.png"));
-                    Speed = 200;
+                    Speed = 100;
                     break;
                 case 3:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost1.png"));
-                    Speed = 300;
+                    Speed = 150;
+                    Sprite.Scale = new Vector2f(0.8f, 0.8f);
                     break;
             }
+
+            defaultSprite = Sprite;
         }
 
         public override void Update(float dt)
@@ -44,14 +52,11 @@ namespace TcGame
             CheckCollisions();
         }
 
+
+
         public void CheckCollisions()
         {
             Player player = Engine.Get.Scene.GetFirst<Player>();
-
-            if (GetGlobalBounds().Intersects(player.GetGlobalBounds()))
-            {
-                GameOver.dead = true;
-            }
 
             foreach(Bala bala in Engine.Get.Scene.GetAll<Bala>())
             {
@@ -60,9 +65,43 @@ namespace TcGame
                     Console.WriteLine(Speed);
                     Engine.Get.Scene.Destroy(this);
                     Engine.Get.Scene.Destroy(bala);
+                    List<Bars> list = Engine.Get.Scene.GetAll<Bars>();
+                    foreach (Bars bar in list) {
+                        if (bar.Position.X < Engine.Get.Window.Size.X/2) {
+                            bar.Position -= new Vector2f(10,0);
+                        }
+                        else if(bar.Position.X > Engine.Get.Window.Size.X / 2)
+                        {
+                            bar.Position += new Vector2f(10, 0);
+                        }
+                        else if (bar.Position.Y < Engine.Get.Window.Size.Y / 2)
+                        {
+                            bar.Position -= new Vector2f(0, 10);
+                        }
+                        else if (bar.Position.Y > Engine.Get.Window.Size.Y / 2)
+                        {
+                            bar.Position += new Vector2f(0, 10);
+                        }
+                    }
 
                 }
             }
         }
-  }
+
+        public void CheckBarCollision()
+        {
+            foreach (Bars bar in Engine.Get.Scene.GetAll<Bars>())
+            {
+                if (GetGlobalBounds().Intersects(bar.GetGlobalBounds()))
+                {
+                    Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghostNull.png"));
+                    Sprite.Rotation += 30;
+                }
+                else
+                {
+                    Sprite = defaultSprite;
+                }
+            }
+        }
+    }
 }
