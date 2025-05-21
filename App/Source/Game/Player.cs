@@ -50,9 +50,8 @@ namespace TcGame {
                 Forward += new Vector2f(0, 1);
             }
             Forward = Forward.Normal();
-
             CheckCollision();
-            CheckBorders();
+            CheckBars();
 
             if (Mouse.IsButtonPressed(Mouse.Button.Left) && time > coolDown)
             {
@@ -69,30 +68,29 @@ namespace TcGame {
             Bala b = Engine.Get.Scene.Create<Bala>();
             b.Position = new Vector2f(Position.X, Position.Y);
         }
-        private bool CheckCollision()
+        private void CheckCollision()
         {
-            List<Person> personList = Engine.Get.Scene.GetAll<Person>();
-            Person nearestPerson = null;
+            List<EnemyGhost> ghostList = Engine.Get.Scene.GetAll<EnemyGhost>();
+            EnemyGhost nearestGhost = null;
             float distMin = 50;
 
-            foreach (Person person in personList)
+            foreach (EnemyGhost ghost in ghostList)
             {
-                Vector2f distVector = (person.Position - Position);
+                Vector2f distVector = (ghost.Position - Position);
                 if (distVector.Size() <= distMin)
                 {
-                    nearestPerson = person;
+                    nearestGhost = ghost;
                 }
             }
 
-            if (nearestPerson != null)
+            if (nearestGhost != null)
             {
-                return true;//End game
+                GameOver.dead = true;  
             }
 
-            return false;
         }
 
-        void CheckBorders()
+        void CheckBars()
         {
             
         }
