@@ -32,7 +32,8 @@ namespace TcGame
             Player player = Engine.Get.Scene.Create<Player>();
             CreatePersonSpawner();
             //CreateOvniSpawner();
-            CreateGhostSpawner();
+            CreateGhostSpawner(new Vector2f(1000.0f, 0.0f), new Vector2f(0.0f, -200.0f));
+            CreateGhostSpawner(new Vector2f(1000, Engine.Get.Window.Size.Y+100), new Vector2f(0, Engine.Get.Window.Size.Y));
             hud = Engine.Get.Scene.Create<Hud>();
             CreateBars();
             Engine.Get.Scene.Create<Map>();
@@ -58,12 +59,12 @@ namespace TcGame
             spawner.MinTime = 15.0f;
             spawner.Reset();
         }*/
-        private void CreateGhostSpawner()
+        private void CreateGhostSpawner(Vector2f MaxPosition, Vector2f MinPosition)
         {
             ActorSpawner<EnemyGhost> spawner;
             spawner = Engine.Get.Scene.Create<ActorSpawner<EnemyGhost>>();
-            spawner.MinPosition = new Vector2f(0.0f, -200.0f);
-            spawner.MaxPosition = new Vector2f(1000.0f, 0.0f);
+            spawner.MinPosition = MinPosition;
+            spawner.MaxPosition = MaxPosition;
             spawner.MinTime = 1.0f;
             spawner.MaxTime = 3.0f;
             spawner.Reset();
