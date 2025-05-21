@@ -47,14 +47,12 @@ namespace TcGame
                 {
                     //ghost.Sprite = new Sprite(new Texture("Data\\Textures\\Player\\player.png"));
                     ghost.Sprite.Color = new Color(0, 0, 0, 0);
-                    ghost.Rotation += 5;
                     ghost.isInBar = true;
                 }
                 else if (!ghost.isInBar)
                 {
-                    ghost.Sprite.Color = new Color(255, 255, 255, 100);
-                    ghost.Sprite = new Sprite(new Texture("Data\\Textures\\Player\\player.png"));
-                    //ghost.Sprite = ghost.defaultSprite;
+                    ghost.Sprite.Color = new Color(255, 255, 255, 255);
+                    ghost.Sprite = ghost.defaultSprite;
                 }
             }
         }
