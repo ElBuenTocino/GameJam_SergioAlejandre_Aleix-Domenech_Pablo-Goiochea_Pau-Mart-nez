@@ -21,7 +21,11 @@ namespace TcGame
         public override void Update(float dt)
         {
             base.Update(dt);
-            MoveLight();
+            if (Mouse.IsButtonPressed(Mouse.Button.Right))
+            {
+                MoveLight();
+                CheckEnemyCollision();
+            }
         }
 
         public override void Draw(RenderTarget target, RenderStates states)
@@ -35,7 +39,7 @@ namespace TcGame
 
         Vector2f GetCursorPosition()
         {
-            Vector2i mousePosition = SFML.Window.Mouse.GetPosition(Engine.Get.Window);
+            Vector2i mousePosition = Mouse.GetPosition(Engine.Get.Window);
             return new Vector2f(mousePosition.X, mousePosition.Y);
         }
 
@@ -55,14 +59,12 @@ namespace TcGame
 
         public void CheckEnemyCollision()
         {
-            foreach (EnemyGhost ghost in Engine.Get.Scene.GetAll<EnemyGhost>())
+            foreach (StaticActor actor in Engine.Get.Scene.GetAll<StaticActor>())
             {
                 //if (GetGlobalBounds().Intersects(ghost.GetGlobalBounds()))
-                if (ghost.GetGlobalBounds().Intersects(rectangleShape.GetGlobalBounds()))
+                if (actor.GetGlobalBounds().Intersects(rectangleShape.GetGlobalBounds()) && actor is not Background && actor is not Bars && actor is not Bala)
                 {
-                    ghost.Sprite.Color = new Color(100, 100, 100, 100);
-                    ghost.Sprite = new Sprite(new Texture("Data\\Textures\\Player\\player.png"));
-                    //ghost.Sprite = ghost.defaultSprite;
+                    actor.Sprite.Color = new Color(actor.Sprite.Color.R, actor.Sprite.Color.G, actor.Sprite.Color.B, 100);
                 }
 
             }

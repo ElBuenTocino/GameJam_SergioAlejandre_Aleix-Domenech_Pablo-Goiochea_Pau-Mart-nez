@@ -102,6 +102,7 @@ namespace TcGame {
                 Engine.Get.Scene.Destroy(nearestGhost);
                 GameOver.dead = true;  
                 time = 0;
+                //Hud.Lifes--;
             }
 
             List<Battery> batteryList = Engine.Get.Scene.GetAll<Battery>();
