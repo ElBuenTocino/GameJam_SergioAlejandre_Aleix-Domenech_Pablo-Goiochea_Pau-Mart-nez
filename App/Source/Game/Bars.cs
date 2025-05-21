@@ -14,8 +14,7 @@ namespace TcGame
         public Bars()
         {
             Layer = ELayer.Background;
-            Speed = 50f;
-            //Speed = 7.5f;
+            Speed = 15f;
             Sprite = new Sprite(new Texture($"Data/Textures/Bars.jpg"));
             Position = new Vector2f(Engine.Get.Window.Size.X + Sprite.GetLocalBounds().Width/2, Engine.Get.Window.Size.Y/2);
             Center();
@@ -34,7 +33,7 @@ namespace TcGame
             Player player = Engine.Get.Scene.GetFirst<Player>();
             if (GetGlobalBounds().Intersects(player.GetGlobalBounds()))
             {
-                GameOver.dead = true;
+                GameOver.dead = false;
             }
         }
 

@@ -129,7 +129,7 @@ namespace TcGame {
             foreach (Radar radar in radarList)
             {
                 Vector2f distVector = (radar.Position - Position);
-                if (distVector.Size() <= distMinBattery)
+                if (distVector.Size() <= distMinRadar)
                 {
                     Engine.Get.Scene.Destroy(radar);
                     Engine.Get.Scene.GetFirst<Player>().mapShowings++;

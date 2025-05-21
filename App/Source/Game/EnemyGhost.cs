@@ -24,17 +24,17 @@ namespace TcGame
             {
                 case 1:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost3.png"));
-                    Speed = 100;
-                    //Sprite.Scale = new Vector2f(1.5f, 1.5f);
+                    Speed = 50;
+                    Sprite.Scale = new Vector2f(1.5f, 1.5f);
                     break;
                 case 2:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost2.png"));
-                    Speed = 200;
+                    Speed = 100;
                     break;
                 case 3:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost1.png"));
-                    Speed = 300;
-                    //Sprite.Scale = new Vector2f(0.8f, 0.8f);
+                    Speed = 150;
+                    Sprite.Scale = new Vector2f(0.8f, 0.8f);
                     break;
             }
 
@@ -68,19 +68,19 @@ namespace TcGame
                     List<Bars> list = Engine.Get.Scene.GetAll<Bars>();
                     foreach (Bars bar in list) {
                         if (bar.Position.X < Engine.Get.Window.Size.X/2) {
-                            bar.Position -= new Vector2f(50,0);
+                            bar.Position -= new Vector2f(10,0);
                         }
                         else if(bar.Position.X > Engine.Get.Window.Size.X / 2)
                         {
-                            bar.Position += new Vector2f(50, 0);
+                            bar.Position += new Vector2f(10, 0);
                         }
                         else if (bar.Position.Y < Engine.Get.Window.Size.Y / 2)
                         {
-                            bar.Position -= new Vector2f(0, 50);
+                            bar.Position -= new Vector2f(0, 10);
                         }
                         else if (bar.Position.Y > Engine.Get.Window.Size.Y / 2)
                         {
-                            bar.Position += new Vector2f(0, 50);
+                            bar.Position += new Vector2f(0, 10);
                         }
                     }
 
