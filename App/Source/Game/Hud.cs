@@ -6,16 +6,20 @@ namespace TcGame
 {
   public class Hud : Actor
   {
+        public int Score;
+
         int persResc = 0, persCap = 0;
-        private Text txt;
+        private Text txt, txt2;
+
         public Hud() 
         {
             Layer = ELayer.Hud;
             Font f = new Font("Data/Fonts/LuckiestGuy.ttf");
             txt = new Text("", f);
+            txt2 = new Text("", f);
             txt.Position = new Vector2f(10, 10);
-            txt.FillColor = new Color(Color.Yellow);
-            txt.DisplayedString = ($"Persones Rescatades: {persResc}\nPersones Capturades: {persCap}");
+            txt.FillColor = new Color(Color.White);
+            txt.DisplayedString = ($"Score: {Score}");
         }
 
         public override void Update(float dt)
@@ -26,7 +30,8 @@ namespace TcGame
 
         public void SetText()
         {
-            txt.DisplayedString = ($"Persones Rescatades: {persResc}\nPersones Capturades: {persCap}");
+            txt.DisplayedString = ($"Score: {Score}");
+            
         }
 
         public void IncreaseRescued()
