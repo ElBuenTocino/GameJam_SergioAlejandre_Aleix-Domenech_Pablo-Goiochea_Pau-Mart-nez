@@ -105,6 +105,7 @@ namespace TcGame
                     if (Hud.HighScore < Hud.Score)
                     { Hud.HighScore = Hud.Score;   }
                     Hud.Score = 0;
+                    Hud.Lifes = 3;
                 }
                 Init();
                 GameOver.dead = false;

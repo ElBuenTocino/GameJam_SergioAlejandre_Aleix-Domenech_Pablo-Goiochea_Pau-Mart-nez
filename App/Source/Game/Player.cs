@@ -94,6 +94,7 @@ namespace TcGame {
                 if (distVector.Size() <= distMin)
                 {
                     nearestGhost = ghost;
+                    
                 }
             }
 
@@ -101,7 +102,7 @@ namespace TcGame {
             {
                 Engine.Get.Scene.Destroy(nearestGhost);
                 GameOver.dead = true;  
-                time = 0;
+                time = 0;               
             }
 
             List<Battery> batteryList = Engine.Get.Scene.GetAll<Battery>();

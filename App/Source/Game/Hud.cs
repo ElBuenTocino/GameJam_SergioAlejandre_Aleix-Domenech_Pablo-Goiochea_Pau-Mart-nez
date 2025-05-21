@@ -11,6 +11,8 @@ namespace TcGame
         private Text txt,scoreText;
         public SFML.Graphics.RectangleShape lightBattery;
         public static int Score, HighScore;
+        public static int Lifes = 3;
+
         public Hud() 
         {
             
