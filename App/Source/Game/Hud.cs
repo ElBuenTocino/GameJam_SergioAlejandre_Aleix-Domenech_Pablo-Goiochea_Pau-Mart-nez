@@ -12,11 +12,21 @@ namespace TcGame
         public SFML.Graphics.RectangleShape lightBattery;
         public static int Score, HighScore;
         public static int Lifes = 3;
-
+        public Sprite Hearth1, Hearth2, Hearth3;
         public Hud() 
         {
-            
             Layer = ELayer.Hud;
+            Hearth1 = new Sprite(new Texture("Data/Textures/Player/Undertale.png"));
+            Hearth1.Position = new Vector2f(640,50);
+            Hearth1.Scale = new Vector2f(0.4f, 0.4f);
+
+            Hearth2 = new Sprite(new Texture("Data/Textures/Player/Undertale.png"));
+            Hearth2.Position = new Vector2f(Hearth1.Position.X+60, 50);
+            Hearth2.Scale = new Vector2f(0.4f, 0.4f);
+
+            Hearth3 = new Sprite(new Texture("Data/Textures/Player/Undertale.png"));
+            Hearth3.Position = new Vector2f(Hearth2.Position.X + 60, 50);
+            Hearth3.Scale = new Vector2f(0.4f, 0.4f);
             Font f = new Font("Data/Fonts/LuckiestGuy.ttf");
             txt = new Text("", f);
             scoreText = new Text("",f);
@@ -44,6 +54,7 @@ namespace TcGame
             UpdateBattery();
         }
 
+
         public void SetText()
         {
             txt.DisplayedString = ("Map Refreshers: " + Engine.Get.Scene.GetFirst<Player>().mapShowings);
@@ -64,6 +75,19 @@ namespace TcGame
             target.Draw(txt);
             target.Draw(scoreText);
             target.Draw(lightBattery);
+            if (Hud.Lifes == 3)
+            {
+                target.Draw(Hearth1);
+                target.Draw(Hearth2);
+                target.Draw(Hearth3);
+            }
+            if (Hud.Lifes == 2)
+            {
+                target.Draw(Hearth1);
+                target.Draw(Hearth2);
+            }
+            if (Hud.Lifes == 1) { target.Draw(Hearth3); }
+            else { }
         }
 
         void UpdateBattery()

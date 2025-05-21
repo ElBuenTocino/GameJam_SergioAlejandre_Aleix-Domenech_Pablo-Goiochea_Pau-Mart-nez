@@ -32,8 +32,8 @@ namespace TcGame {
         {
             if (!GameOver.dead)
             {
+                isInBar = false;
                 time += dt;
-
                 Vector2f maousePos = Engine.Get.MousePos - Position;
                 Rotation = (float)Math.Atan2(maousePos.Y, maousePos.X) * MathUtil.RAD2DEG + 90;
                 if (Keyboard.IsKeyPressed(Keyboard.Key.A) && (Position.X > 0))
@@ -99,10 +99,10 @@ namespace TcGame {
 
             if (nearestGhost != null)
             {
-                Engine.Get.Scene.Destroy(nearestGhost);
-                GameOver.dead = true;  
+                Engine.Get.Scene.Destroy(nearestGhost); 
                 time = 0;
-                //Hud.Lifes--;
+                Hud.Lifes--;
+                if (Hud.Lifes <= 0) { GameOver.dead = true; } 
             }
 
             List<Battery> batteryList = Engine.Get.Scene.GetAll<Battery>();
