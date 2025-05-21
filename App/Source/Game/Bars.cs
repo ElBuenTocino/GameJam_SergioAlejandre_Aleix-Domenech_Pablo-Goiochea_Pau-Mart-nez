@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TcGame;
 
-namespace App.Source.Game
+namespace TcGame
 {
     public class Bars : StaticActor
     {

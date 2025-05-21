@@ -2,6 +2,7 @@
 using SFML.Graphics;
 using SFML.System;
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices.JavaScript;
 
 namespace TcGame
@@ -69,6 +70,24 @@ namespace TcGame
                     Console.WriteLine(Speed);
                     Engine.Get.Scene.Destroy(this);
                     Engine.Get.Scene.Destroy(bala);
+                    List<Bars> list = Engine.Get.Scene.GetAll<Bars>();
+                    foreach (Bars bar in list) {
+                        if (bar.Position.X < Engine.Get.Window.Size.X/2) {
+                            bar.Position -= new Vector2f(50,0);
+                        }
+                        else if(bar.Position.X > Engine.Get.Window.Size.X / 2)
+                        {
+                            bar.Position += new Vector2f(50, 0);
+                        }
+                        else if (bar.Position.Y < Engine.Get.Window.Size.Y / 2)
+                        {
+                            bar.Position -= new Vector2f(0, 50);
+                        }
+                        else if (bar.Position.Y > Engine.Get.Window.Size.Y / 2)
+                        {
+                            bar.Position += new Vector2f(0, 50);
+                        }
+                    }
 
                 }
             }
