@@ -34,6 +34,7 @@ namespace TcGame
             //CreateOvniSpawner();
             CreateGhostSpawner();
             CreateBatterySpawner();
+            CreateRadarSpawner();
             hud = Engine.Get.Scene.Create<Hud>();
             CreateBars();
             Engine.Get.Scene.Create<Map>();
@@ -74,6 +75,16 @@ namespace TcGame
         {
             ActorSpawner<Battery> spawner;
             spawner = Engine.Get.Scene.Create<ActorSpawner<Battery>>();
+            spawner.MinPosition = new Vector2f(0.0f, -200.0f);
+            spawner.MaxPosition = new Vector2f(1000.0f, 0.0f);
+            spawner.MinTime = 3.0f;
+            spawner.MaxTime = 5.0f;
+            spawner.Reset();
+        }
+        private void CreateRadarSpawner()
+        {
+            ActorSpawner<Radar> spawner;
+            spawner = Engine.Get.Scene.Create<ActorSpawner<Radar>>();
             spawner.MinPosition = new Vector2f(0.0f, -200.0f);
             spawner.MaxPosition = new Vector2f(1000.0f, 0.0f);
             spawner.MinTime = 3.0f;

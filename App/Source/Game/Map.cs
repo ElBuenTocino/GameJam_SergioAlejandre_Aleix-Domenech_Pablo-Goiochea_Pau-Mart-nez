@@ -109,6 +109,12 @@ namespace TcGame
 
                 Console.Write("   ");
             }
+            else if (map[x, y] == 'R')
+            {
+                Console.BackgroundColor = ConsoleColor.DarkGreen;
+
+                Console.Write("   ");
+            }
             else
             {
                 Console.Write(" · ");
@@ -173,6 +179,26 @@ namespace TcGame
                         if (bx >= 0 && bx < tilesWidth && by >= 0 && by < tilesHeight)
                         {
                             map[bx, by] = 'B';
+                        }
+                    }
+                }
+            }
+
+            List<Radar> radars = Engine.Get.Scene.GetAll<Radar>();
+
+            if (radars != null && radars.Count > 0)
+            {
+                for (int i = 0; i <= radars.Count - 1; i++)
+                {
+                    if (radars[i] != null)
+                    {
+                        int rx = (int)((radars[i].Position.X - viewRect.Left) / 100);
+                        int ry = (int)((radars[i].Position.Y - viewRect.Top) / 100);
+
+
+                        if (rx >= 0 && rx < tilesWidth && ry >= 0 && ry < tilesHeight)
+                        {
+                            map[rx, ry] = 'R';
                         }
                     }
                 }
