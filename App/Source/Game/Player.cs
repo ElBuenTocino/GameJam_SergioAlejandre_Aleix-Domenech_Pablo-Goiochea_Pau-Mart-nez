@@ -64,6 +64,16 @@ namespace TcGame {
                 base.Update(dt);
                 Forward *= 0;
             }
+            else
+            {
+                CheckCollision();
+                time += dt;
+                if (time > coolDown)
+                {
+                    Rotation = 0;
+                    Sprite = new Sprite(new Texture("Data/Textures/Player/dead.png"));
+                }
+            }
         }
 
         void Shoot()
@@ -90,6 +100,7 @@ namespace TcGame {
             {
                 Engine.Get.Scene.Destroy(nearestGhost);
                 GameOver.dead = true;  
+                time = 0;
             }
 
         }
