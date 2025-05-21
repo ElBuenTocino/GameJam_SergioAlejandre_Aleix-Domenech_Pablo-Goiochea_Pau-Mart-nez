@@ -15,7 +15,7 @@ namespace TcGame
             txt = new Text("", f);
             txt.Position = new Vector2f(10, 10);
             txt.FillColor = new Color(Color.Yellow);
-            txt.DisplayedString = ($"Persones Rescatades: {persResc}\nPersones Capturades: {persCap}");
+            txt.DisplayedString = ("Map Refreshers: " + 3);
         }
 
         public override void Update(float dt)
@@ -26,7 +26,7 @@ namespace TcGame
 
         public void SetText()
         {
-            txt.DisplayedString = ($"Persones Rescatades: {persResc}\nPersones Capturades: {persCap}");
+            txt.DisplayedString = ("Map Refreshers: " + Engine.Get.Scene.GetFirst<Player>().mapShowings);
         }
 
         public void IncreaseRescued()

@@ -80,17 +80,6 @@ namespace TcGame
                 Window.Close();
             }
 
-            //Window.Close();
-            //videoMode = new VideoMode(videoMode.Width - 1, videoMode.Height - 1);
-            //Window = new RenderWindow(videoMode, "get out");
-            if (Keyboard.IsKeyPressed(Keyboard.Key.K))
-            {
-                //Window.Close();
-                //videoMode = new VideoMode (videoMode.Width - 100, videoMode.Height - 100);
-                //Window = new RenderWindow(videoMode, "get out");
-
-            }
-
             Scene.Update(dt);
             SoundMgr.Update(dt);
 
