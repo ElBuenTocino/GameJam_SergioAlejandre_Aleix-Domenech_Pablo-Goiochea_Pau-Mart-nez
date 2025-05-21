@@ -103,6 +103,9 @@ namespace TcGame
                 foreach (Actor actor in actores)
                 {
                     Engine.Get.Scene.Destroy(actor);
+                    if (Hud.HighScore < Hud.Score)
+                    { Hud.HighScore = Hud.Score;   }
+                    Hud.Score = 0;
                 }
                 Init();
                 GameOver.dead = false;
