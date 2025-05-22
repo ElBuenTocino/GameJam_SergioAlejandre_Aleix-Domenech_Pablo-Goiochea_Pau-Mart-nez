@@ -10,7 +10,7 @@ namespace TcGame
   {
         int persResc = 0, persCap = 0;
         private Text txt,scoreText, highScoreText;
-        private Text gameOvertxt, pressKtxt, pressEsctxt;
+        private Text gameOvertxt, pressRtxt, pressEsctxt;
         public SFML.Graphics.RectangleShape lightBattery;
         public float Score, timerScore, highScore = 0;
         //List<float> highScore = new List<float>();
@@ -39,26 +39,29 @@ namespace TcGame
             txt.DisplayedString = ("Map Refreshers: " + 3);
             scoreText.DisplayedString = ($"SCORE: {Score}");
             highScoreText = new Text ("",f);
-            highScoreText.Position = new Vector2f(Engine.Get.Window.Size.X / 2.7f, Engine.Get.Window.Size.Y / 1.9f);
+            highScoreText.Position = new Vector2f(Engine.Get.Window.Size.X / 2.4f, Engine.Get.Window.Size.Y / 1.95f);
+            highScoreText.FillColor = new Color(Color.White);
+            highScoreText.OutlineThickness = 2.5f;
+            highScoreText.OutlineColor = new Color(Color.Black);
             highScoreText.DisplayedString = ($"HIGH SCORE: {highScore}");
 
             gameOvertxt = new Text("", f);
-            pressKtxt = new Text("", f);
+            pressRtxt = new Text("", f);
             pressEsctxt = new Text("", f);
             gameOvertxt.Position = new Vector2f(Engine.Get.Window.Size.X / 3.7f, Engine.Get.Window.Size.Y / 3f);
-            pressKtxt.Position = new Vector2f(Engine.Get.Window.Size.X / 2.7f, Engine.Get.Window.Size.Y / 2.1f);
+            pressRtxt.Position = new Vector2f(Engine.Get.Window.Size.X / 2.7f, Engine.Get.Window.Size.Y / 2.1f);
             pressEsctxt.Position = new Vector2f(Engine.Get.Window.Size.X / 2.65f, Engine.Get.Window.Size.Y / 2.3f);
             gameOvertxt.Scale = new Vector2f(3, 3);
             gameOvertxt.FillColor = new Color(Color.Red);
-            pressKtxt.FillColor = new Color(Color.White);
+            pressRtxt.FillColor = new Color(Color.White);
             pressEsctxt.FillColor = new Color(Color.White);
-            pressKtxt.OutlineThickness = 3;
-            pressEsctxt.OutlineThickness = 3;
+            pressRtxt.OutlineThickness = 2.5f;
+            pressEsctxt.OutlineThickness = 2.5f;
             gameOvertxt.OutlineThickness = 2.5f;
-            pressKtxt.OutlineColor = new Color(Color.Black);
+            pressRtxt.OutlineColor = new Color(Color.Black);
             pressEsctxt.OutlineColor = new Color(Color.Black);
             gameOvertxt.DisplayedString = ("GAME OVER");
-            pressKtxt.DisplayedString = ("Press R to restart");
+            pressRtxt.DisplayedString = ("Press R to restart");
             pressEsctxt.DisplayedString = ("Press ESC to exit");
 
 
@@ -129,10 +132,10 @@ namespace TcGame
             {
 
                 target.Draw(gameOvertxt);
-                target.Draw(pressKtxt);
+                target.Draw(pressRtxt);
                 target.Draw(pressEsctxt);
                 target.Draw(scoreText);
-                //target.Draw(highScoreText);
+                target.Draw(highScoreText);
             }
         }
 
