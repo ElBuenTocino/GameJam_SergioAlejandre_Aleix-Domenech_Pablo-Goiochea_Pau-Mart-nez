@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace TcGame {
     public class Player : StaticActor 
     {
-        private float deathCooldown = 0.06f, time = 0, bulletCooldown = 0.2f;
+        private float deathCooldown = 0.06f, time = 0, bulletCooldown = 0.3f;
         public int mapShowings;
         Sound hurt, deadSound;
         public Player()

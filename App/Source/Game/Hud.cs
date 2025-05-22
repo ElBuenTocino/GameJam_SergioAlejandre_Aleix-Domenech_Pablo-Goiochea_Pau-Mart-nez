@@ -9,11 +9,11 @@ namespace TcGame
   public class Hud : Actor
   {
         int persResc = 0, persCap = 0;
-        private Text txt,scoreText;
+        private Text txt,scoreText, highScoreText;
         private Text gameOvertxt, pressKtxt, pressEsctxt;
         public SFML.Graphics.RectangleShape lightBattery;
-        public float Score, timerScore;
-        List<float> highScore = new List<float>();
+        public float Score, timerScore, highScore = 0;
+        //List<float> highScore = new List<float>();
         public static int Lifes = 3;
         public Sprite Hearth1, Hearth2, Hearth3;
         public Hud() 
@@ -38,6 +38,9 @@ namespace TcGame
             txt.FillColor = new Color(Color.White);
             txt.DisplayedString = ("Map Refreshers: " + 3);
             scoreText.DisplayedString = ($"SCORE: {Score}");
+            highScoreText = new Text ("",f);
+            highScoreText.Position = new Vector2f(Engine.Get.Window.Size.X / 2.7f, Engine.Get.Window.Size.Y / 1.9f);
+            highScoreText.DisplayedString = ($"HIGH SCORE: {highScore}");
 
             gameOvertxt = new Text("", f);
             pressKtxt = new Text("", f);
@@ -75,11 +78,12 @@ namespace TcGame
             SetText();
             UpdateBattery();
             timerScore += dt;
-            if(timerScore > 1)
+            if(timerScore > 1 && !GameOver.dead)
             {
                 Score++;
                 timerScore = 0;
             }
+            
         }
 
 
@@ -87,6 +91,10 @@ namespace TcGame
         {
             txt.DisplayedString = ("Map Refreshers: " + Engine.Get.Scene.GetFirst<Player>().mapShowings);
             scoreText.DisplayedString = ($"SCORE: {Score}");
+            if (highScore < Score)
+            { 
+                highScore = Score;
+            }
         }
 
         public void IncreaseRescued()
@@ -119,9 +127,12 @@ namespace TcGame
 
             if (GameOver.dead)
             {
+
                 target.Draw(gameOvertxt);
                 target.Draw(pressKtxt);
                 target.Draw(pressEsctxt);
+                target.Draw(scoreText);
+                //target.Draw(highScoreText);
             }
         }
 
