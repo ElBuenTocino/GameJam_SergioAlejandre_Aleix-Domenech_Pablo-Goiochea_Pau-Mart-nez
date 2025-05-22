@@ -117,39 +117,14 @@ namespace TcGame
                 target.Draw(Hearth1);
                 target.Draw(Hearth2);
             }
-            if (Hud.Lifes == 1) { target.Draw(Hearth3); }
+            if (Hud.Lifes == 1) { target.Draw(Hearth1); }
             else { }
 
             if (GameOver.dead)
             {
-                bool higher = false;
                 target.Draw(gameOvertxt);
                 target.Draw(pressKtxt);
                 target.Draw(pressEsctxt);
-                if (!endRead)
-                {
-                    StreamReader reader = File.OpenText("Data/HighScore.txt");
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        if(Convert.ToSingle(line) < Score)
-                        {
-                            higher = true;
-                            Console.WriteLine(higher);
-                        }
-                    }
-                    
-                    reader.Close();
-                    if (true)
-                    {
-                        StreamWriter writer = File.CreateText("Data/HighScore.txt");
-                        writer.WriteLine("hola");
-                        writer.Flush();
-                        writer.Close();
-                    }
-                    
-                    endRead = true;
-                }
 
             }
         }

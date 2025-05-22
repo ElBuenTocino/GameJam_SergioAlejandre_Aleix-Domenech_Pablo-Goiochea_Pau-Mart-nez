@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace TcGame {
     public class Player : StaticActor 
     {
-        private float deathCooldown = 0.06f, time = 0, bulletCooldown = 0.3f;
+        private float deathCooldown = 0.06f, time = 0, bulletCooldown = 0.5f;
         public int mapShowings;
         public float hurtTimer;
         Sound hurt, deadSound;
@@ -77,12 +77,12 @@ namespace TcGame {
             else
             {
                 CheckCollision();
-                deadSound.Play();
                 time += dt;
                 if (time > deathCooldown)
                 {
                     Rotation = 0;
                     Sprite = new Sprite(new Texture("Data/Textures/Player/dead.png"));
+                    deadSound.Play();
                 }
             }
         }
