@@ -3,6 +3,7 @@ using SFML.System;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace TcGame
 {
@@ -16,6 +17,7 @@ namespace TcGame
         List<float> highScore = new List<float>();
         public static int Lifes = 3;
         public Sprite Hearth1, Hearth2, Hearth3;
+        bool endRead;
         public Hud() 
         {
             Layer = ELayer.Hud;
@@ -58,6 +60,7 @@ namespace TcGame
             pressKtxt.DisplayedString = ("Press R to restart");
             pressEsctxt.DisplayedString = ("Press ESC to exit");
 
+            endRead = false;
 
             lightBattery = new RectangleShape(new Vector2f(50, 150))
             {
@@ -75,7 +78,7 @@ namespace TcGame
             SetText();
             UpdateBattery();
             timerScore += dt;
-            if(timerScore > 1)
+            if(timerScore > 1 && !GameOver.dead)
             {
                 Score++;
                 timerScore = 0;
@@ -119,9 +122,33 @@ namespace TcGame
 
             if (GameOver.dead)
             {
+                bool higher = false;
                 target.Draw(gameOvertxt);
                 target.Draw(pressKtxt);
                 target.Draw(pressEsctxt);
+                if (!endRead)
+                {
+                    StreamReader reader = File.OpenText("Data/HighScore.txt");
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        if(Convert.ToSingle(line) < Score)
+                        {
+                            higher = true;
+                            Console.WriteLine(higher);
+                        }
+                    }
+                    reader.Close();
+                    if (true)
+                    {
+                        StreamWriter writer = File.CreateText("Data/HighScore.txt");
+                        writer.WriteLine("hola");
+                        writer.Close();
+                    }
+                    
+                    endRead = true;
+                }
+
             }
         }
 

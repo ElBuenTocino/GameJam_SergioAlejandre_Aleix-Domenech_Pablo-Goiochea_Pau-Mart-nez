@@ -157,6 +157,9 @@
     <None Update="Data\foreground.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Data\HighScore.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Data\kk.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
