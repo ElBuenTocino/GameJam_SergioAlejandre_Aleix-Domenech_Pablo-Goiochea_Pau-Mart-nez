@@ -37,6 +37,8 @@ namespace TcGame
             //CreateOvniSpawner();
             CreateGhostSpawner(new Vector2f(1000.0f, 0.0f), new Vector2f(0.0f, -200.0f));
             CreateGhostSpawner(new Vector2f(1000, Engine.Get.Window.Size.Y+100), new Vector2f(0, Engine.Get.Window.Size.Y));
+            CreateBatterySpawner();
+            CreateRadarSpawner();
             hud = Engine.Get.Scene.Create<Hud>();
             CreateBars();
             Engine.Get.Scene.Create<Map>();
@@ -70,6 +72,26 @@ namespace TcGame
             spawner.MaxPosition = MaxPosition;
             spawner.MinTime = 1.0f;
             spawner.MaxTime = 3.0f;
+            spawner.Reset();
+        }
+        private void CreateBatterySpawner()
+        {
+            ActorSpawner<Battery> spawner;
+            spawner = Engine.Get.Scene.Create<ActorSpawner<Battery>>();
+            spawner.MinPosition = new Vector2f(0.0f, 0);
+            spawner.MaxPosition = new Vector2f(Engine.Get.Window.Size.X, Engine.Get.Window.Size.Y);
+            spawner.MinTime = 10.0f;
+            spawner.MaxTime = 15.0f;
+            spawner.Reset();
+        }
+        private void CreateRadarSpawner()
+        {
+            ActorSpawner<Radar> spawner;
+            spawner = Engine.Get.Scene.Create<ActorSpawner<Radar>>();
+            spawner.MinPosition = new Vector2f(0, 0);
+            spawner.MaxPosition = new Vector2f(Engine.Get.Window.Size.X, Engine.Get.Window.Size.Y);
+            spawner.MinTime = 10.0f;
+            spawner.MaxTime = 15.0f;
             spawner.Reset();
         }
         private void CreateBars()
