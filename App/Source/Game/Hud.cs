@@ -9,6 +9,7 @@ namespace TcGame
   {
         int persResc = 0, persCap = 0;
         private Text txt,scoreText;
+        private Text gameOvertxt, pressKtxt, pressEsctxt;
         public SFML.Graphics.RectangleShape lightBattery;
         public static int Score, HighScore;
         public static int Lifes = 3;
@@ -35,7 +36,21 @@ namespace TcGame
             txt.FillColor = new Color(Color.White);
             txt.DisplayedString = ("Map Refreshers: " + 3);
             scoreText.DisplayedString = ($"SCORE: {Score}");
-            
+
+            gameOvertxt = new Text("", f);
+            pressKtxt = new Text("", f);
+            pressEsctxt = new Text("", f);
+            gameOvertxt.Position = new Vector2f(Engine.Get.Window.Size.X / 3.7f, Engine.Get.Window.Size.Y / 3f);
+            pressKtxt.Position = new Vector2f(Engine.Get.Window.Size.X / 2.7f, Engine.Get.Window.Size.Y / 2.1f);
+            pressEsctxt.Position = new Vector2f(Engine.Get.Window.Size.X / 2.65f, Engine.Get.Window.Size.Y / 2.3f);
+            gameOvertxt.Scale = new Vector2f(3, 3);
+            gameOvertxt.FillColor = new Color(Color.Red);
+            pressKtxt.FillColor = new Color(Color.Black);
+            pressEsctxt.FillColor = new Color(Color.Black);
+            gameOvertxt.DisplayedString = ("GAME OVER");
+            pressKtxt.DisplayedString = ("Press K to restart");
+            pressEsctxt.DisplayedString = ("Press ESC to exit");
+
 
             lightBattery = new RectangleShape(new Vector2f(50, 150))
             {
@@ -52,6 +67,7 @@ namespace TcGame
             base.Update(dt);
             SetText();
             UpdateBattery();
+            
         }
 
 
@@ -88,6 +104,13 @@ namespace TcGame
             }
             if (Hud.Lifes == 1) { target.Draw(Hearth3); }
             else { }
+
+            if (GameOver.dead)
+            {
+                target.Draw(gameOvertxt);
+                target.Draw(pressKtxt);
+                target.Draw(pressEsctxt);
+            }
         }
 
         void UpdateBattery()
