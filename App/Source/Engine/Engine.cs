@@ -51,7 +51,7 @@ namespace TcGame
         {
             uint resolution = 900;
             videoMode = new VideoMode(resolution, resolution);
-            Window = new RenderWindow(videoMode, "Arkanoid");
+            Window = new RenderWindow(videoMode, "Running out of Light");
             View fixedView = new View(new FloatRect(0, 0, resolution, resolution));
             Window.SetView(fixedView);
             Window.SetVerticalSyncEnabled(true);
