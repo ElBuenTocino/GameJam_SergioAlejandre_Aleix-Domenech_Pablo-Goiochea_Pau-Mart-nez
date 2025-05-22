@@ -14,6 +14,7 @@ namespace TcGame {
     {
         private float deathCooldown = 0.06f, time = 0, bulletCooldown = 0.3f;
         public int mapShowings;
+        public float hurtTimer;
         Sound hurt, deadSound;
         public Player()
         {
@@ -36,6 +37,8 @@ namespace TcGame {
 
         public override void Update(float dt)
         {
+            hurtTimer += dt;
+
             if (!GameOver.dead)
             {
                 isInBar = false;
@@ -105,7 +108,7 @@ namespace TcGame {
                 }
             }
 
-            if (nearestGhost != null)
+            if (nearestGhost != null && hurtTimer > 0.5)
             {
                 if(Hud.Lifes > 0) { 
                     hurt.Play();
@@ -114,7 +117,9 @@ namespace TcGame {
                 Engine.Get.Scene.Destroy(nearestGhost); 
                 time = 0;
                 Hud.Lifes--;
-                if (Hud.Lifes <= 0) { GameOver.Die(); }             }
+                hurtTimer = 0;
+                if (Hud.Lifes <= 0) { GameOver.Die(); }              
+            }
 
             List<Battery> batteryList = Engine.Get.Scene.GetAll<Battery>();
             Battery nearestBattery = null;

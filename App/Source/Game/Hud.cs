@@ -125,7 +125,7 @@ namespace TcGame
                 target.Draw(Hearth1);
                 target.Draw(Hearth2);
             }
-            if (Hud.Lifes == 1) { target.Draw(Hearth3); }
+            if (Hud.Lifes == 1) { target.Draw(Hearth1); }
             else { }
 
             if (GameOver.dead)
