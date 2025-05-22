@@ -2,6 +2,7 @@
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using SFML.Audio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,6 +82,7 @@ namespace TcGame {
         {
             Bala b = Engine.Get.Scene.Create<Bala>();
             b.Position = new Vector2f(Position.X, Position.Y);
+            b.blaster.Play();
         }
         private void CheckCollision()
         {

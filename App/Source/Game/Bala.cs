@@ -1,5 +1,6 @@
 ﻿using SFML.Graphics;
 using SFML.System;
+using SFML.Audio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace TcGame {
     internal class Bala : StaticActor {
-
+        public Sound blaster;
         public Bala()
         {
             Sprite = new Sprite(new Texture("Data/Textures/Bullets/bala.png"));
@@ -17,6 +18,8 @@ namespace TcGame {
             Center();
             Forward = Engine.Get.MousePos - Engine.Get.Scene.GetFirst<Player>().Position;
             Forward = Forward.Normal();
+            SoundBuffer sb = new SoundBuffer("Data/Audio/blaster.wav");
+            blaster = new Sound(sb);
         }
         public override void Update(float dt)
         {
