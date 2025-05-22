@@ -14,7 +14,7 @@ namespace TcGame
         public Bars()
         {
             Layer = ELayer.Background;
-            Speed = 20f;
+            Speed = 15f;
             //Speed = 7.5f;
             Sprite = new Sprite(new Texture($"Data/Textures/Bars.jpg"));
             Position = new Vector2f(Engine.Get.Window.Size.X + Sprite.GetLocalBounds().Width / 2, Engine.Get.Window.Size.Y / 2);

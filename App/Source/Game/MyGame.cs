@@ -14,6 +14,7 @@ namespace TcGame
         private static MyGame instance;
         public Bars rightBar, leftBar, downBar, upBar;
         public float minDist = 1;
+        public static int numSpaw = 1;
         public static MyGame Get
         {
             get
@@ -111,6 +112,7 @@ namespace TcGame
             downBar.Rotation = 90;
             downBar.Position = new Vector2f(Engine.Get.Window.Size.X / 2, Engine.Get.Window.Size.Y + downBar.GetLocalBounds().Width / 2);
             downBar.Forward = new Vector2f(0, -1);
+            Hud hud = Engine.Get.Scene.GetFirst<Hud>();
 
         }
         public void DeInit()
@@ -124,9 +126,9 @@ namespace TcGame
                 foreach (Actor actor in actores)
                 {
                     Engine.Get.Scene.Destroy(actor);
-                    if (Hud.HighScore < Hud.Score)
-                    { Hud.HighScore = Hud.Score;   }
-                    Hud.Score = 0;
+                    //if (Hud.HighScore < Hud.Score)
+                    //{ Hud.HighScore = Hud.Score;   }
+                    hud.Score = 0;
                     Hud.Lifes = 3;
                 }
                 Init();
@@ -144,6 +146,10 @@ namespace TcGame
                 {
                     Engine.Get.Scene.Destroy(enemyGhost);
                 }
+            }
+            if (hud.Score / 500 == numSpaw) {
+                CreateGhostSpawner(new Vector2f(1000.0f, 0.0f), new Vector2f(0.0f, -200.0f));
+                numSpaw++;
             }
             int minmax = 2000;
             //Clamps for bars

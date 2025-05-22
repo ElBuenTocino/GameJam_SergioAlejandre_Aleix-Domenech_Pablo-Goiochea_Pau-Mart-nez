@@ -2,6 +2,7 @@
 using SFML.System;
 using SFML.Window;
 using System;
+using System.Collections.Generic;
 
 namespace TcGame
 {
@@ -11,7 +12,8 @@ namespace TcGame
         private Text txt,scoreText;
         private Text gameOvertxt, pressKtxt, pressEsctxt;
         public SFML.Graphics.RectangleShape lightBattery;
-        public static int Score, HighScore;
+        public float Score, timerScore;
+        List<float> highScore = new List<float>();
         public static int Lifes = 3;
         public Sprite Hearth1, Hearth2, Hearth3;
         public Hud() 
@@ -72,7 +74,12 @@ namespace TcGame
             base.Update(dt);
             SetText();
             UpdateBattery();
-            
+            timerScore += dt;
+            if(timerScore > 1)
+            {
+                Score++;
+                timerScore = 0;
+            }
         }
 
 

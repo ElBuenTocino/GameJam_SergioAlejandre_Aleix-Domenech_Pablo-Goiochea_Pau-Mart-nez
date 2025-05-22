@@ -12,7 +12,7 @@ namespace TcGame
         public bool beingCaptured;
         public bool beingReached;
         public Sprite defaultSprite;
-
+        Hud hud;
         public EnemyGhost()
         {
             Layer = ELayer.Back;
@@ -24,20 +24,20 @@ namespace TcGame
             {
                 case 1:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost3.png"));
-                    Speed = 30;
+                    Speed = 30*(MyGame.numSpaw * 1.5f);
                     Sprite.Scale = new Vector2f(1.5f, 1.5f);
                     break;
                 case 2:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost2.png"));
-                    Speed = 70;
+                    Speed = 70*(MyGame.numSpaw*1.5f);
                     break;
                 case 3:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost1.png"));
-                    Speed = 120;
+                    Speed = 120*(MyGame.numSpaw*1.5f);
                     Sprite.Scale = new Vector2f(0.8f, 0.8f);
                     break;
             }
-
+            hud = Engine.Get.Scene.GetFirst<Hud>();
             defaultSprite = Sprite;
         }
 
@@ -68,13 +68,13 @@ namespace TcGame
                     Engine.Get.Scene.Destroy(bala);
                     if (Speed >= 150)
                     {
-                        Hud.Score += 10;
+                        hud.Score += 10;
                     }
                     else if (Speed >= 100)
                     {
-                        Hud.Score += 15;
+                        hud.Score += 15;
                     }
-                    else { Hud.Score += 20; }
+                    else { hud.Score += 20; }
                     List<Bars> list = Engine.Get.Scene.GetAll<Bars>();
                     foreach (Bars bar in list)
                     {
