@@ -14,6 +14,7 @@ namespace TcGame {
     {
         private float deathCooldown = 0.06f, time = 0, bulletCooldown = 0.2f;
         public int mapShowings;
+        Sound hurt, deadSound;
         public Player()
         {
             Layer = ELayer.Front;
@@ -22,6 +23,10 @@ namespace TcGame {
             Center();
             Speed = 500;
             mapShowings = 10;
+            SoundBuffer sb1 = new SoundBuffer("Data/Audio/hurt.wav");
+            hurt = new Sound(sb1);
+            SoundBuffer sb2 = new SoundBuffer("Data/Audio/dead.wav");
+            deadSound = new Sound(sb2);
         }
 
         public override void Draw(RenderTarget target, RenderStates states)
@@ -69,6 +74,7 @@ namespace TcGame {
             else
             {
                 CheckCollision();
+                deadSound.Play();
                 time += dt;
                 if (time > deathCooldown)
                 {
@@ -101,11 +107,14 @@ namespace TcGame {
 
             if (nearestGhost != null)
             {
+                if(Hud.Lifes > 0) { 
+                    hurt.Play();
+                }
+                
                 Engine.Get.Scene.Destroy(nearestGhost); 
                 time = 0;
                 Hud.Lifes--;
-                if (Hud.Lifes <= 0) { GameOver.dead = true; } 
-            }
+                if (Hud.Lifes <= 0) { GameOver.Die(); }             }
 
             List<Battery> batteryList = Engine.Get.Scene.GetAll<Battery>();
             Battery nearestBattery = null;

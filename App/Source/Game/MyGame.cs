@@ -118,7 +118,7 @@ namespace TcGame
         }
         public void Update(float dt)
         {
-            if (Keyboard.IsKeyPressed(Keyboard.Key.K))
+            if (Keyboard.IsKeyPressed(Keyboard.Key.R))
             {
                 List<Actor> actores = Engine.Get.Scene.GetAll<Actor>();
                 foreach (Actor actor in actores)
@@ -131,6 +131,19 @@ namespace TcGame
                 }
                 Init();
                 GameOver.dead = false;
+            }
+            if (GameOver.dead) { 
+                List<EnemyGhost> destroyE = Engine.Get.Scene.GetAll<EnemyGhost>();
+                List<ActorSpawner<EnemyGhost>> destroyS = Engine.Get.Scene.GetAll<ActorSpawner<EnemyGhost>>();
+
+                foreach (EnemyGhost enemyGhost in destroyE)
+                {
+                    Engine.Get.Scene.Destroy(enemyGhost);
+                }
+                foreach (ActorSpawner<EnemyGhost> enemyGhost in destroyS)
+                {
+                    Engine.Get.Scene.Destroy(enemyGhost);
+                }
             }
             int minmax = 2000;
             //Clamps for bars

@@ -24,16 +24,16 @@ namespace TcGame
             {
                 case 1:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost3.png"));
-                    Speed = 60;
+                    Speed = 30;
                     Sprite.Scale = new Vector2f(1.5f, 1.5f);
                     break;
                 case 2:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost2.png"));
-                    Speed = 120;
+                    Speed = 70;
                     break;
                 case 3:
                     Sprite = new Sprite(new Texture("Data\\Textures\\Enemies\\ghost1.png"));
-                    Speed = 180;
+                    Speed = 120;
                     Sprite.Scale = new Vector2f(0.8f, 0.8f);
                     break;
             }
@@ -66,11 +66,11 @@ namespace TcGame
                 {
                     Engine.Get.Scene.Destroy(this);
                     Engine.Get.Scene.Destroy(bala);
-                    if (Speed == 50)
+                    if (Speed >= 150)
                     {
                         Hud.Score += 10;
                     }
-                    if (Speed == 100)
+                    else if (Speed >= 100)
                     {
                         Hud.Score += 15;
                     }

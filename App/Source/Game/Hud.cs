@@ -53,7 +53,7 @@ namespace TcGame
             pressKtxt.OutlineColor = new Color(Color.Black);
             pressEsctxt.OutlineColor = new Color(Color.Black);
             gameOvertxt.DisplayedString = ("GAME OVER");
-            pressKtxt.DisplayedString = ("Press K to restart");
+            pressKtxt.DisplayedString = ("Press R to restart");
             pressEsctxt.DisplayedString = ("Press ESC to exit");
 
 
@@ -122,7 +122,7 @@ namespace TcGame
         {
             if (Mouse.IsButtonPressed(Mouse.Button.Right) && lightBattery.Size.Y > 0)
             {
-                lightBattery.Size = new Vector2f(lightBattery.Size.X, lightBattery.Size.Y - 0.5f);
+                lightBattery.Size = new Vector2f(lightBattery.Size.X, lightBattery.Size.Y - 0.2f);
             }
         }
     }
