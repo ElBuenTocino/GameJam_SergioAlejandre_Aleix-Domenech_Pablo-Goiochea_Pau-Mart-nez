@@ -138,11 +138,13 @@ namespace TcGame
                             Console.WriteLine(higher);
                         }
                     }
+                    
                     reader.Close();
                     if (true)
                     {
                         StreamWriter writer = File.CreateText("Data/HighScore.txt");
                         writer.WriteLine("hola");
+                        writer.Flush();
                         writer.Close();
                     }
                     
