@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace TcGame {
     public class Player : StaticActor 
     {
-        private float deathCooldown = 0.06f, time = 0, bulletCooldown = 0.3f;
+        private float deathCooldown = 0.06f, time = 0, bulletCooldown = 0.2f;
         public int mapShowings;
         public Player()
         {

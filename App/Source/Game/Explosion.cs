@@ -9,7 +9,7 @@ namespace TcGame
     private float LifeTime;
     public Explosion()
     {
-      AnimatedSprite = new AnimatedSprite(new Texture("Data/Textures/FX/Explosion.png"), 4, 1);
+      AnimatedSprite = new AnimatedSprite(new Texture("Data/Textures/FX/Explosion2.png"), 4, 1);
       AnimatedSprite.Loop = false;
       AnimatedSprite.FrameTime = 0.2f;
       LifeTime = AnimatedSprite.FrameTime * 3.0f;

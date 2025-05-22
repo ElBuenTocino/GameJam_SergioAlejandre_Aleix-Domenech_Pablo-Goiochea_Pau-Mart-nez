@@ -45,8 +45,13 @@ namespace TcGame
             pressEsctxt.Position = new Vector2f(Engine.Get.Window.Size.X / 2.65f, Engine.Get.Window.Size.Y / 2.3f);
             gameOvertxt.Scale = new Vector2f(3, 3);
             gameOvertxt.FillColor = new Color(Color.Red);
-            pressKtxt.FillColor = new Color(Color.Black);
-            pressEsctxt.FillColor = new Color(Color.Black);
+            pressKtxt.FillColor = new Color(Color.White);
+            pressEsctxt.FillColor = new Color(Color.White);
+            pressKtxt.OutlineThickness = 3;
+            pressEsctxt.OutlineThickness = 3;
+            gameOvertxt.OutlineThickness = 2.5f;
+            pressKtxt.OutlineColor = new Color(Color.Black);
+            pressEsctxt.OutlineColor = new Color(Color.Black);
             gameOvertxt.DisplayedString = ("GAME OVER");
             pressKtxt.DisplayedString = ("Press K to restart");
             pressEsctxt.DisplayedString = ("Press ESC to exit");

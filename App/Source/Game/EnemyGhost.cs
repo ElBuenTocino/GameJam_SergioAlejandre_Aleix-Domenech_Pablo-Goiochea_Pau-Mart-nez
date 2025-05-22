@@ -80,19 +80,19 @@ namespace TcGame
                     {
                         if (bar.Position.X < Engine.Get.Window.Size.X / 2)
                         {
-                            bar.Position -= new Vector2f(10, 0);
+                            bar.Position -= new Vector2f(15, 0);
                         }
                         else if (bar.Position.X > Engine.Get.Window.Size.X / 2)
                         {
-                            bar.Position -= new Vector2f(-10, 0);
+                            bar.Position -= new Vector2f(-15, 0);
                         }
                         else if (bar.Position.Y < Engine.Get.Window.Size.Y / 2)
                         {
-                            bar.Position -= new Vector2f(0, 10);
+                            bar.Position -= new Vector2f(0, 15);
                         }
                         else if (bar.Position.Y > Engine.Get.Window.Size.Y / 2)
                         {
-                            bar.Position -= new Vector2f(0, -10);
+                            bar.Position -= new Vector2f(0, -15);
                         }
                     }
 

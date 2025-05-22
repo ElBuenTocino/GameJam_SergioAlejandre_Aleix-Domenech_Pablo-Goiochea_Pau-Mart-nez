@@ -466,6 +466,9 @@
     <None Update="Data\Textures\FX\Explosion.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Data\Textures\FX\Explosion2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Data\Textures\FX\PlaneCloudGas.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
